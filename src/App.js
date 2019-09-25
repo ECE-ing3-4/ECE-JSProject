@@ -3,7 +3,7 @@ import { BrowserRouter, Route, Link } from 'react-router-dom';
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Chat from './Chat/Chat.js';
-//salut
+//salut lol 
 var usersList = ['Alexis', 'Neil'];
 
 class App extends Component {
