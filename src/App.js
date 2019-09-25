@@ -3,8 +3,9 @@ import { BrowserRouter, Route, Link } from 'react-router-dom';
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Chat from './Chat/Chat.js';
+
 var usersList = ['Alexis', 'Neil'];
-//hello KEVIN
+
 class App extends Component {
   constructor(props) {
     super(props);
@@ -43,7 +44,16 @@ class App extends Component {
       <BrowserRouter>
         <div>
           <li><Link to="/auth">Clock</Link></li>
-          <Route exact path="/auth" component={() => <Chat change={this.handleChange} send={this.handleSend} chat={this.state.chat} />} />
+          <li><Link to="/check">Clock</Link></li>
+
+          <Route exact path="/auth" component={() =>
+            <Chat change={this.handleChange} send={this.handleSend} chat={this.state.chat} />
+          } />
+
+          <Route exact path="/check" component={() =>
+            <p>Ceci est la balance du compte : 9999999999 euros</p>
+          } />
+
           {this.displayChat()}
         </div>
       </BrowserRouter>
