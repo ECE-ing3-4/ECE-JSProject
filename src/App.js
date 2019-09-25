@@ -3,9 +3,8 @@ import { BrowserRouter, Route, Link } from 'react-router-dom';
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Chat from './Chat/Chat.js';
-//salut lol 
 var usersList = ['Alexis', 'Neil'];
-//hello ALEXIS
+//hello bjr
 class App extends Component {
   constructor(props) {
     super(props);
