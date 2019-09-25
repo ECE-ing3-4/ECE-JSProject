@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { BrowserRouter, Route, Link } from 'react-router-dom';
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import inputText from './inputText/inputText.js';
+import Chat from './Chat/Chat.js';
 
 var usersList = ['Alexis', 'Neil'];
 
@@ -44,10 +44,10 @@ class App extends Component {
       <BrowserRouter>
         <div>
           <li><Link to="/auth">Connexion</Link></li>
-          <li><Link to="/check">Bakance</Link></li>
+          <li><Link to="/check">Balance</Link></li>
 
           <Route exact path="/auth" component={() =>
-            <inputText change={this.handleChange} send={this.handleSend} chat={this.state.chat} />
+            <Chat change={this.handleChange} send={this.handleSend} chat={this.state.chat} />
           } />
 
           <Route exact path="/check" component={() =>

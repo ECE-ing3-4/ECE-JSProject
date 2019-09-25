@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-class inputText extends Component {
+class Chat extends Component {
     render() {
         return (
             <div>
@@ -12,4 +12,4 @@ class inputText extends Component {
         );
     }
 }
-export default inputText; 
+export default Chat; 
