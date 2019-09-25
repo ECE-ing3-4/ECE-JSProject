@@ -14,20 +14,16 @@ class App extends Component {
     this.handleChange = this.handleChange.bind(this);
   }
 
-  allowedUser(user){
-    usersList.forEach(function(item, index, array) {
-      console.log(user + " vs " + item);
-      if (user==item){
-        console.log("Autorise");
-        return 1;
-      }
+  allowedUser(user) {
+    var found = usersList.find((name) => {
+      return name == user;
     });
-    console.log("Non autorise")
-    return 0;
+    console.log(found);
+    return found;
   }
 
   handleSend(event) {
-    this.allowedUser(this.state.chat);
+    console.log(this.allowedUser(this.state.chat));
     this.setState({ display: this.state.display.concat(this.state.chat), chat: '' });
   }
 
