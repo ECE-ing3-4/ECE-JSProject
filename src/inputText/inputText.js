@@ -12,4 +12,4 @@ class inputText extends Component {
         );
     }
 }
-export default Chat; 
+export default inputText; 
