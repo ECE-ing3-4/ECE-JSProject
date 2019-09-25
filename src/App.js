@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { BrowserRouter, Route, Link } from 'react-router-dom';
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Chat from './Chat/Chat.js';
@@ -40,10 +41,13 @@ class App extends Component {
 
   render() {
     return (
-      <div>
-        <Chat change={this.handleChange} send={this.handleSend} chat={this.state.chat} />
-        {this.displayChat()}
-      </div>
+      <BrowserRouter>
+        <div>
+          <li><Link to="/auth">Clock</Link></li>
+          <Route exact path="/auth" component={() => <Chat change={this.handleChange} send={this.handleSend} chat={this.state.chat} />} />
+          {this.displayChat()}
+        </div>
+      </BrowserRouter>
     );
   }
 }
