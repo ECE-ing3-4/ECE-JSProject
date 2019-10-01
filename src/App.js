@@ -9,10 +9,8 @@ var usersList = ['Alexis', 'Neil'];
 class App extends Component {
   constructor(props) {
     super(props);
-    this.state = { display: [], chat: '' };;
+    this.state = { chat: [] };;
     this.handleSend = this.handleSend.bind(this);
-    this.displayChat = this.displayChat.bind(this);
-    this.handleChange = this.handleChange.bind(this);
   }
 
   allowedUser(user) {
@@ -23,20 +21,8 @@ class App extends Component {
     return found;
   }
 
-  handleSend(event) {
-    console.log(this.allowedUser(this.state.chat));
-    this.setState({ display: this.state.display.concat(this.state.chat), chat: '' });
-  }
-
-  displayChat() {
-    let chat = this.state.display.map((item) => {
-      return (<p>{item}</p>);
-    });
-    return (<div class="display">{chat}</div>);
-  }
-
-  handleChange(event) {
-    this.setState({ [event.target.name]: event.target.value });
+  handleSend(name, text) {
+    this.setState({ chat: this.state.chat.concat(`${name}: ${text}`) });
   }
 
   render() {
@@ -45,8 +31,16 @@ class App extends Component {
         <div>
           <li><Link to="/signin">Sign in</Link></li>
           <li><Link to="/login">Log in</Link></li>
+          
+          <li><Link to="/modifyaccount">Modify your account</Link></li>
+          <li><Link to="/addcard">Add a card</Link></li>
+          <li><Link to="/modifycard">Modify a card</Link></li>
+
           <li><Link to="/balance">Balance</Link></li>
+          <li><Link to="/deposit">Deposit</Link></li>
+          <li><Link to="/withdrawal">Withdrawal</Link></li>
           <li><Link to="/transfert">Transfert</Link></li>
+
 
           <Route exact path="/signin" component={() =>
             <>
@@ -56,14 +50,44 @@ class App extends Component {
 
           <Route exact path="/login" component={() =>
             <>
-              <Chat change={this.handleChange} send={this.handleSend} chat={this.state.chat} />
+              <Chat onSend={this.handleSend} name="login" display={this.state.chat} />
+            </>
+          } />
+
+          <Route exact path="/modifyaccount" component={() =>
+            <>
+              <p>Modify your account page WIP</p>
+            </>
+          } />
+
+          <Route exact path="/addcard" component={() =>
+            <>
+              <p>Add a card page WIP</p>
+            </>
+          } />
+
+          <Route exact path="/modifycard" component={() =>
+            <>
+              <p>Modify a card page WIP</p>
             </>
           } />
 
           <Route exact path="/balance" component={() =>
             <>
               <p>Balance page WIP</p>
-              <p>Ceci est la balance du compte : 9999999999 euros</p>
+              <p>Your currrent balance is 9999999999 usd</p>
+            </>
+          } />
+
+          <Route exact path="/deposit" component={() =>
+            <>
+              <p>Deposit page WIP</p>
+            </>
+          } />
+
+          <Route exact path="/withdrawal" component={() =>
+            <>
+              <p>Withdrawal in page WIP</p>
             </>
           } />
 
@@ -73,7 +97,6 @@ class App extends Component {
             </>
           } />
 
-          {this.displayChat()}
         </div>
       </BrowserRouter>
     );
