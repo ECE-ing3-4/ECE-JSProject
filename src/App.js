@@ -31,10 +31,11 @@ class App extends Component {
         <div>
           <li><Link to="/signin">Sign in</Link></li>
           <li><Link to="/login">Log in</Link></li>
-          
+
           <li><Link to="/modifyaccount">Modify your account</Link></li>
           <li><Link to="/addcard">Add a card</Link></li>
           <li><Link to="/modifycard">Modify a card</Link></li>
+          <li><Link to="/deletecard">Delete a card</Link></li>
 
           <li><Link to="/balance">Balance</Link></li>
           <li><Link to="/deposit">Deposit</Link></li>
@@ -67,6 +68,12 @@ class App extends Component {
           } />
 
           <Route exact path="/modifycard" component={() =>
+            <>
+              <p>Delete a card page WIP</p>
+            </>
+          } />
+
+          <Route exact path="/deletecard" component={() =>
             <>
               <p>Modify a card page WIP</p>
             </>
