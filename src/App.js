@@ -17,7 +17,7 @@ class App extends Component {
 
   allowedUser(user) {
     var found = usersList.find((name) => {
-      return name == user;
+      return name === user;
     });
     console.log(found);
     return found;
@@ -43,15 +43,34 @@ class App extends Component {
     return (
       <BrowserRouter>
         <div>
-          <li><Link to="/auth">Connexion</Link></li>
-          <li><Link to="/check">Balance</Link></li>
+          <li><Link to="/signin">Sign in</Link></li>
+          <li><Link to="/login">Log in</Link></li>
+          <li><Link to="/balance">Balance</Link></li>
+          <li><Link to="/transfert">Transfert</Link></li>
 
-          <Route exact path="/auth" component={() =>
-            <Chat change={this.handleChange} send={this.handleSend} chat={this.state.chat} />
+          <Route exact path="/signin" component={() =>
+            <>
+              <p>Sign in page WIP</p>
+            </>
           } />
 
-          <Route exact path="/check" component={() =>
-            <p>Ceci est la balance du compte : 9999999999 euros</p>
+          <Route exact path="/login" component={() =>
+            <>
+              <Chat change={this.handleChange} send={this.handleSend} chat={this.state.chat} />
+            </>
+          } />
+
+          <Route exact path="/balance" component={() =>
+            <>
+              <p>Balance page WIP</p>
+              <p>Ceci est la balance du compte : 9999999999 euros</p>
+            </>
+          } />
+
+          <Route exact path="/transfert" component={() =>
+            <>
+              <p>Transfert page WIP</p>
+            </>
           } />
 
           {this.displayChat()}
