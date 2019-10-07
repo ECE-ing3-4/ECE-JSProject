@@ -1,6 +1,6 @@
-import React, { Component } from 'react';
+import React, { Component } from '../../node_modules/react';
 
-class Chat extends Component {
+class InputText extends Component {
     constructor(props) {
         super(props)
         this.state = { chat: '' };
@@ -38,4 +38,4 @@ class Chat extends Component {
         );
     }
 }
-export default Chat
+export default InputText

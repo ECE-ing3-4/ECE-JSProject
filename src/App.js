@@ -54,7 +54,7 @@ class App extends Component {
         <div>
           {links()}
 
-          {Signin()}
+          {Signin(this)}
           {login(this)}
           {modifyaccount()}
           {addcard()}
@@ -64,8 +64,6 @@ class App extends Component {
           {deposit()}
           {withdrawal()}
           {transfer()}
-          
-
         </div>
       </BrowserRouter>
     );
