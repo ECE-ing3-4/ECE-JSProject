@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { BrowserRouter, Route, Link } from 'react-router-dom';
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import Chat from './Chat/Chat.js';
 import links from './Pages/links.js';
 import Signin from './Pages/Signin.js';
 import login from './Pages/login.js';
@@ -34,6 +33,11 @@ class App extends Component {
     super(props);
     this.state = { chat: [] };;
     this.handleSend = this.handleSend.bind(this);
+    this.handleSendLoginForm = this.handleSendLoginForm.bind(this);
+  }
+
+  handleSendLoginForm(login, password) {
+    console.log (`user : ${login}, password: ${password}`);
   }
 
   allowedUser(user) {

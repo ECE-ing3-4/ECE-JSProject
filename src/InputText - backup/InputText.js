@@ -27,15 +27,15 @@ class InputText extends Component {
 
 
     //{this.displayText()}
-    //<button onClick={this.handleSend}>Envoyer</button>
     render() {
         return (
             <div>
-                <p>
-                    {this.props.name}
+                <div>
+                    <p>{this.props.name}
                     <input type="text" name="text" onChange={this.handleChange} value={this.state.text} />
+                    </p>
                     <button onClick={this.handleSend}>Envoyer</button>
-                </p>
+                </div>
             </div>
         );
     }
