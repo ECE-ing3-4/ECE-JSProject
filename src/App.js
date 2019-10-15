@@ -13,10 +13,9 @@ import balance from './Pages/balance.js';
 import deposit from './Pages/deposit.js';
 import withdrawal from './Pages/withdrawal.js';
 import transfer from './Pages/transfer.js';
-
 import { linkSync } from 'fs';
 
-var users = [];
+var listUsers = [];
 
 const user = {
   id: -1,
@@ -24,7 +23,10 @@ const user = {
   last_name: 'string',
   email: 'email, string unique',
   password: 'string',
-  is_admin: 'boolean'
+  is_admin: 'boolean',
+  print() {
+    console.log("id:" + this.id + " first_name:" + this.first_name + " last_name:" + this.last_name + " email:" + this.email + " password:" + this.password + " is_admin:" + this.is_admin);
+  }
 };
 
 class App extends Component {
@@ -38,13 +40,21 @@ class App extends Component {
 
   /** BUTTON HANDLE */
   handleSendLoginForm(obj) {
-    console.log(`email : ${obj.email}, password: ${obj.password}`);
+    //console.log(`email : ${obj.email}, password: ${obj.password}`);
+    var id = this.validUser(obj.email, obj.password);
+    if (id >= 0) {
+      var index = this.findIndexObject(listUsers, id);
+      console.log("Bienvenue " + listUsers[index].first_name);
+    }
+    else {
+      console.log("NOPE");
+    }
   }
 
   handleSendSigninForm(obj) {
-    usr=new user();
-    addObjectToList
-    console.log(`first_name : ${obj.first_name}, last_name : ${obj.last_name}, email : ${obj.email}, password : ${obj.password}`);
+    //console.log(`first_name : ${obj.first_name}, last_name : ${obj.last_name}, email : ${obj.email}, password : ${obj.password}`);
+    this.addUser(listUsers, obj.first_name, obj.last_name, obj.email, obj.password, false);
+    //this.printList(listUsers);
   }
 
   handleSend(name, text) {
@@ -52,6 +62,17 @@ class App extends Component {
   }
 
   /** LISTS MANIPULATION */
+  validUser(mail, pswd) {
+    var item;
+    for (var i = 0; i < listUsers.length; i++) {
+      item = listUsers[i];
+      if (item.email == mail & item.password == pswd) {
+        return item.id;
+      }
+    }
+    return -1;
+  }
+
   addObjectToList(list, object) {
     var newIndex = list.length;//number of item, but list[0] is the first one
     var newId = 0;
@@ -70,6 +91,7 @@ class App extends Component {
   }
 
   printList(list) {
+    console.log("la liste : ");
     list.forEach(function (item, index, list) {
       item.print();
     });
@@ -95,24 +117,25 @@ class App extends Component {
     }
   }
 
-  editUser(listU, idU, fn, ln, e, p, ia) {
-    var index = findIndexObject(listU, idU);
-    listUsers[index].first_name = fn;
-    listUsers[index].last_name = ln;
-    listUsers[index].email = e;
-    listUsers[index].password = p;
-    listUsers[index].is_admin = ia;
+  editUser(list, idU, fn, ln, e, p, ia) {
+    var index = this.findIndexObject(list, idU);
+    list[index].first_name = fn;
+    list[index].last_name = ln;
+    list[index].email = e;
+    list[index].password = p;
+    list[index].is_admin = ia;
     //listUsers[index].print();
   }
 
-  allowedUser(user) {
-    var found = users.find((name) => {
-      return name === user;
-    });
-    console.log(found);
-    return found;
+  addUser(list, fn, ln, e, p, ia) {
+    var id = this.addObjectToList(list, user)
+    var index = this.findIndexObject(list, id);
+    list[index].first_name = fn;
+    list[index].last_name = ln;
+    list[index].email = e;
+    list[index].password = p;
+    list[index].is_admin = ia;
   }
-
 
   /** RENDER */
   render() {

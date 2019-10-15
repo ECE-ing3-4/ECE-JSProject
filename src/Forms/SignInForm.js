@@ -29,6 +29,7 @@ class LoginForm extends Component {
                     email <input type="text" name="email" onChange={this.handleChange} value={this.state.email} />
                     <br />
                     password <input type="text" name="password" onChange={this.handleChange} value={this.state.password} />
+                    <br />
                     <button onClick={this.handleSendForm}>Envoyer</button>
                 </div>
             </div>

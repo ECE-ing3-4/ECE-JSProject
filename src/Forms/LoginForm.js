@@ -22,7 +22,7 @@ class LoginForm extends Component {
         return (
             <div>
                 <div>
-                    Username <input type="text" name="email" onChange={this.handleChange} value={this.state.email} />
+                    Email <input type="text" name="email" onChange={this.handleChange} value={this.state.email} />
                     <br/>
                     Password <input type="text" name="password" onChange={this.handleChange} value={this.state.password} />
                     <br/>
