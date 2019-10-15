@@ -3,8 +3,8 @@ import React, { Component } from 'react';
 class LoginForm extends Component {
     constructor(props) {
         super(props)
-        this.state = { login: '', password: '' };
-        this.handleSendLoginForm = this.handleSendLoginForm.bind(this);
+        this.state = { email: '', password: '' };
+        this.handleSendForm = this.handleSendForm.bind(this);
         this.handleChange = this.handleChange.bind(this);
     }
 
@@ -12,21 +12,21 @@ class LoginForm extends Component {
         this.setState({ [event.target.name]: event.target.value });
     }
 
-    handleSendLoginForm() {
+    handleSendForm() {
         //console.log(this.state);
-        this.props.onSend(this.state.login, this.state.password);
-        this.setState({ login: '' , password: '' });
+        this.props.onSend(this.state);
+        this.setState({ email: '' , password: '' });
     }
 
     render() {
         return (
             <div>
                 <div>
-                    Username <input type="text" name="login" onChange={this.handleChange} value={this.state.login} />
+                    Username <input type="text" name="email" onChange={this.handleChange} value={this.state.email} />
                     <br/>
                     Password <input type="text" name="password" onChange={this.handleChange} value={this.state.password} />
                     <br/>
-                    <button onClick={this.handleSendLoginForm}>Envoyer</button>
+                    <button onClick={this.handleSendForm}>Envoyer</button>
                 </div>
             </div>
         );

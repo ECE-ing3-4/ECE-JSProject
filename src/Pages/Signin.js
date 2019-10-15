@@ -9,7 +9,7 @@ export default function signin(obj) {
             <Route exact path="/signin" component={() =>
                 <>
                     Sign in page
-                    <SignInForm onSend={obj.handleSendLoginForm} />
+                    <SignInForm onSend={obj.handleSendSigninForm} />
                 </>
             } />
         </div>
