@@ -8,6 +8,7 @@ export default function login(obj) {
         <div>
             <Route exact path="/login" component={() =>
                 <>
+                    Log in page
                     <LoginForm onSend={obj.handleSendLoginForm} />
                 </>
             } />
