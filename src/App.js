@@ -52,8 +52,9 @@ class App extends Component {
   }
 
   handleSendSigninForm(obj) {
-    //console.log(`first_name : ${obj.first_name}, last_name : ${obj.last_name}, email : ${obj.email}, password : ${obj.password}`);
     this.addUser(listUsers, obj.first_name, obj.last_name, obj.email, obj.password, false);
+    console.log(`${obj.first_name} Added !`);
+    //console.log(`first_name : ${obj.first_name}, last_name : ${obj.last_name}, email : ${obj.email}, password : ${obj.password}`);
     //this.printList(listUsers);
   }
 
