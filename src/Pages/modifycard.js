@@ -2,6 +2,15 @@ import React from 'react';
 import { Route } from 'react-router-dom';
 
 export default function modifycard() {
+    return (
+        <div>
+            <Route exact path="/modifycard" component={() =>
+            <>
+              <p>Modify card WIP</p>
+            </>
+          } />
+        </div>
+    )
     /*
     const tabcartes = [1,2,3];
 

@@ -1,13 +1,15 @@
 import React, { Component } from 'react';
 import { BrowserRouter, Route, Link } from 'react-router-dom';
-import AddCardForm from '../forms/AddCardForm.js';
+import DeleteCardForm from '../forms/DeleteCardForm.js';
 
-export default function deletecard() {
+export default function deletecard(obj) {
     return (
         <div>
             <Route exact path="/deletecard" component={() =>
             <>
               <p>Delete a card page WIP</p>
+              <br/>
+              <DeleteCardForm onSend={obj.handleDeleteCardForm} />
             </>
           } />
         </div>

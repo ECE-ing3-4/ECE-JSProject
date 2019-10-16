@@ -230,7 +230,7 @@ class App extends Component {
           {modifyaccount()}
           {addcard(this)}
           {modifycard()}
-          {deletecard()}
+          {deletecard(this)}
           {balance()}
           {deposit()}
           {withdrawal()}
