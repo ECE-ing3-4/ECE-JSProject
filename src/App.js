@@ -104,15 +104,8 @@ class App extends Component {
   handleDeleteCardForm(obj) {
     if (currentUser > 0 || acceptNotLogin) {
       let deletedWell = false;
-<<<<<<< HEAD
-      for (var i = 0; i < listCards.length; i++) {
-
-        if (currentUser == listCards[i].user_id && listCards[i].last_4 == obj.last_4) {
-=======
-      for (var i = 0; i < listCards.length; i++)
       for (var i = 0; i < listCards.length; i++){
         if (currentUser === listCards[i].user_id && listCards[i].last_4 === obj.last_4) {
->>>>>>> d865a9c0b82c479e6ea33d3536581b9bec7bd99a
           console.log("programmer pour supp la carte");
           deletedWell = true;
         }
