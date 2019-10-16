@@ -21,6 +21,7 @@ var listUsers = [];
 var listWallets = [];
 var listCards = [];
 var currentUser = -1;
+var acceptNotLogin = true;//debug
 
 const user = {
   id: -1,
@@ -92,7 +93,7 @@ class App extends Component {
   }
 
   handleSendAddCardForm(obj) {
-    if (currentUser > 0 || true) {
+    if (currentUser > 0 || acceptNotLogin) {
       this.addCard(listCards, currentUser, obj.brand);
     }
     else {
@@ -101,7 +102,7 @@ class App extends Component {
   }
 
   handleDeleteCardForm(obj) {
-    if (currentUser > 0 || true) {
+    if (currentUser > 0 || acceptNotLogin) {
       let deletedWell = false;
       console.log(listCards[0].last_4 );
       console.log(listCards[1].last_4 );
