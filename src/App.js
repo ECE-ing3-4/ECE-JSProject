@@ -88,7 +88,7 @@ class App extends Component {
 
   handleSendAddCardForm(obj) {
     //console.log(`id ${obj.id}, user_id ${obj.user_id}, last_4 ${obj.last_4}, brand ${obj.brand}, expired_at ${obj.expired_at}`);
-    this.addCard(listCards, 1, obj.brand);
+    this.addCard(listCards, currentUser, obj.brand);
     //console.log(`${obj.first_name} Added !`);
   }
 
