@@ -2,18 +2,18 @@ import React, { Component } from 'react';
 import { BrowserRouter, Route, Link } from 'react-router-dom';
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import links from './Pages/links.js';
+import links from './Pages/Links.js';
 
 import Signin from './Pages/Signin.js';
-import login from './Pages/login.js';
-import modifyaccount from './Pages/modifyaccount.js';
-import addcard from './Pages/addcard.js';
-import modifycard from './Pages/modifycard.js';
-import deletecard from './Pages/deletecard.js';
-import balance from './Pages/balance.js';
-import deposit from './Pages/deposit.js';
-import withdrawal from './Pages/withdrawal.js';
-import transfer from './Pages/transfer.js';
+import login from './Pages/Login.js';
+import modifyaccount from './Pages/ModifyAccount.js';
+import addcard from './Pages/Addcard.js';
+import modifycard from './Pages/ModifyCard.js';
+import deletecard from './Pages/Deletecard.js';
+import balance from './Pages/Balance.js';
+import deposit from './Pages/Deposit.js';
+import withdrawal from './Pages/Withdrawal.js';
+import transfer from './Pages/Transfer.js';
 
 var listUsers = [];
 var listCards = [];
@@ -52,30 +52,7 @@ class App extends Component {
   }
 
   /** BUTTON HANDLE */
-  handleSendLoginForm(obj) {
-    //console.log(`email : ${obj.email}, password: ${obj.password}`);
-    var id = this.validUser(obj.email, obj.password);
-    if (id >= 0) {
-      var index = this.findIndexObject(listUsers, id);
-      console.log("Bienvenue " + listUsers[index].first_name);
-    }
-    else {
-      console.log("NOPE");
-    }
-  }
-
-  handleSendSigninForm(obj) {
-    //console.log(`${obj.first_name} Added !`);
-    this.addUser(listUsers, obj.first_name, obj.last_name, obj.email, obj.password, false);
-    //console.log(`first_name : ${obj.first_name}, last_name : ${obj.last_name}, email : ${obj.email}, password : ${obj.password}`);
-    //this.printList(listUsers);
-  }
-
-  handleSendAddCardForm(obj) {
-    //console.log(`id ${obj.id}, user_id ${obj.user_id}, last_4 ${obj.last_4}, brand ${obj.brand}, expired_at ${obj.expired_at}`);
-    this.addCard(listCards, 1, obj.brand);
-    //console.log(`${obj.first_name} Added !`);
-  }
+  
 
   handleSend(name, text) {
     this.setState({ chat: this.state.chat.concat(`${name}: ${text}`) });
@@ -157,11 +134,30 @@ class App extends Component {
     list[index].is_admin = ia;
   }
 
+  getRandom(max) {
+    return Math.floor(Math.random()*Math.floor(max));
+  }
+
+  getDateExp() {
+    var ladate = new Date()
+    const current_date= {mm : -1 , yyyy: -1};
+    current_date.mm = this.getRandom(12) + 1;
+    current_date.yyyy = ladate.getFullYear() + (this.getRandom (3) + 1 );
+    console.log('La date d expiration  est le ', current_date.mm,' / ',current_date.yyyy )
+    return (current_date.mm + '/' + current_date.yyyy);
+  }
+
+  lastFourDigits() {
+    return this.getRandom(10000);
+  }
+
   addCard(list, user_id, brand) {
     var id = this.addObjectToList(list, card);
     var index = this.findIndexObject(list, id);
     list[index].user_id = user_id;
     list[index].brand = brand;
+    list[index].last_4 = this.lastFourDigits();
+    list[index].expired_at = this.getDateExp();
     list[index].print();
   }
 
