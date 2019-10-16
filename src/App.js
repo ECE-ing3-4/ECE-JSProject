@@ -59,10 +59,11 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = { chat: [] };;
-    this.handleSend = this.handleSend.bind(this);
+    //this.handleSend = this.handleSend.bind(this);
     this.handleSendLoginForm = this.handleSendLoginForm.bind(this);
     this.handleSendSigninForm = this.handleSendSigninForm.bind(this);
     this.handleSendAddCardForm = this.handleSendAddCardForm.bind(this);
+    this.handleDepositForm = this.handleDepositForm.bind(this);
   }
 
   /** BUTTON HANDLE */
@@ -104,10 +105,10 @@ class App extends Component {
   handleDeleteCardForm(obj) {
     if (currentUser > 0 || acceptNotLogin) {
       let deletedWell = false;
-      console.log(listCards[0].last_4 );
-      console.log(listCards[1].last_4 );
+      console.log(listCards[0].last_4);
+      console.log(listCards[1].last_4);
       for (var i = 0; i < listCards.length; i++) {
-          console.log(listCards[i].last_4 );
+        console.log(listCards[i].last_4);
         if (currentUser == listCards[i].user_id && listCards[i].last_4 == obj.last_4) {
           console.log("programmer pour supp la carte");
           deletedWell = true;
@@ -117,16 +118,39 @@ class App extends Component {
         console.log("Card not found");
       }
 
-    else {
-      console.log("Log in first please !");
+      else {
+        console.log("Log in first please !");
       }
     }
   }
 
-
-  handleSend(name, text) {
-    this.setState({ chat: this.state.chat.concat(`${name}: ${text}`) });
+  findWalletUser(idUser) {
+    var wallet;
+    for (var i = 0; i < listWallets.length; i++) {
+      wallet = listWallets[i];
+      if (wallet.user_id === idUser) {
+        return (i);
+      }
+    }
   }
+
+  handleDepositForm(obj) {
+    if (currentUser > 0 || acceptNotLogin) {
+
+      var wallet = this.findWalletUser(currentUser);
+      wallet.balance += obj.amount;
+    }
+
+    else {
+      console.log("Log in first please !");
+    }
+
+  }
+
+
+  /*handleSend(name, text) {
+    this.setState({ chat: this.state.chat.concat(`${name}: ${text}`) });
+  }*/
 
   /** LISTS MANIPULATION */
   validUser(mail, pswd) {
@@ -157,12 +181,12 @@ class App extends Component {
     return newId;
   }
 
-  printList(list) {
+  /*printList(list) {
     console.log("la liste : ");
     list.forEach(function (item, index, list) {
       item.print();
     });
-  }
+  }*/
 
   findObject(list, idSearched) {
     var item;
@@ -253,7 +277,7 @@ class App extends Component {
           {modifycard()}
           {deletecard(this)}
           {balance()}
-          {deposit()}
+          {deposit(this)}
           {withdrawal()}
           {transfer()}
         </div>
