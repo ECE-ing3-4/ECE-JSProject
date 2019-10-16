@@ -110,6 +110,7 @@ class App extends Component {
         if (currentUser == listCards[i].user_id && listCards[i].last_4 == obj.last_4) {
 =======
       for (var i = 0; i < listCards.length; i++)
+      for (var i = 0; i < listCards.length; i++){
         if (currentUser === listCards[i].user_id && listCards[i].last_4 === obj.last_4) {
 >>>>>>> d865a9c0b82c479e6ea33d3536581b9bec7bd99a
           console.log("programmer pour supp la carte");
@@ -119,11 +120,10 @@ class App extends Component {
       if (!deletedWell) {
         console.log("Card not found");
       }
-    }
-
 
     else {
       console.log("Log in first please !");
+      }
     }
   }
 
