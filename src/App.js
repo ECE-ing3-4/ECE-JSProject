@@ -18,6 +18,7 @@ import { handleSendLoginForm } from './Function/handlebutton.js';
 
 
 var listUsers = [];
+var listWallets = [];
 var listCards = [];
 var currentUser = -1;
 
@@ -41,6 +42,15 @@ const card = {
   expired_at: '',
   print() {
     console.log("CARD : id:" + this.id + " user_id:" + this.user_id + " last_4:" + this.last_4 + " brand:" + this.brand + " expired_at:" + this.expired_at);
+  }
+};
+
+const wallet = {
+  id: -1,
+  user_id: -1,
+  balance: 0,
+  print() {
+    console.log("WALLET : id:" + this.id + " user_id:" + this.user_id + " balance:" + this.balance);
   }
 };
 
@@ -70,6 +80,7 @@ class App extends Component {
   handleSendSigninForm(obj) {
     //console.log(`${obj.first_name} Added !`);
     this.addUser(listUsers, obj.first_name, obj.last_name, obj.email, obj.password, false);
+    this.addWallet(listWallets, 0);
     //console.log(`first_name : ${obj.first_name}, last_name : ${obj.last_name}, email : ${obj.email}, password : ${obj.password}`);
     //this.printList(listUsers);
   }
@@ -78,10 +89,6 @@ class App extends Component {
     //console.log(`id ${obj.id}, user_id ${obj.user_id}, last_4 ${obj.last_4}, brand ${obj.brand}, expired_at ${obj.expired_at}`);
     this.addCard(listCards, 1, obj.brand);
     //console.log(`${obj.first_name} Added !`);
-  }
-
-  handleSendSigninForm(obj) {
-    this.addUser(listUsers, obj.first_name, obj.last_name, obj.email, obj.password, false);
   }
 
   handleSendAddCardForm(obj) {
@@ -97,7 +104,7 @@ class App extends Component {
     if (currentUser > 0 || true) {
       let deletedWell = false;
       for (var i = 0; i < listCards.length; i++)
-        if (currentUser == listCards[i].user_id && listCards[i].last_4 == obj.last_4) {
+        if (currentUser === listCards[i].user_id && listCards[i].last_4 === obj.last_4) {
           console.log("programmer pour supp la carte");
           deletedWell = true;
         }
@@ -121,7 +128,7 @@ class App extends Component {
     var item;
     for (var i = 0; i < listUsers.length; i++) {
       item = listUsers[i];
-      if (item.email == mail & item.password == pswd) {
+      if (item.email === mail & item.password === pswd) {
         return item.id;
       }
     }
@@ -156,7 +163,7 @@ class App extends Component {
     var item;
     for (var i = 0; i < list.length; i++) {
       item = list[i];
-      if (item.id == idSearched) {
+      if (item.id === idSearched) {
         return (item)
       }
     }
@@ -166,7 +173,7 @@ class App extends Component {
     var item;
     for (var i = 0; i < list.length; i++) {
       item = list[i];
-      if (item.id == idSearched) {
+      if (item.id === idSearched) {
         return (i);
       }
     }
@@ -190,6 +197,13 @@ class App extends Component {
     list[index].email = e;
     list[index].password = p;
     list[index].is_admin = ia;
+    list[index].print();
+  }
+
+  addWallet(list, bal) {
+    var id = this.addObjectToList(list, wallet);
+    var index = this.findIndexObject(list, id);
+    list[index].balance = bal;
     list[index].print();
   }
 
