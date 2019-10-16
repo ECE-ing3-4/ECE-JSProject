@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 class AddCardForm extends Component {
     constructor(props) {
         super(props)
-        this.state = { id: -1, user_id: -1, last_4: 0, brand: '', expired_at: '' };
+        this.state = { brand: '' };
         this.handleSendForm = this.handleSendForm.bind(this);
         this.handleChange = this.handleChange.bind(this);
     }
@@ -13,9 +13,9 @@ class AddCardForm extends Component {
     }
 
     handleSendForm() {
-        console.log(this.state.brand);
+        //console.log(this.state.brand);
         this.props.onSend(this.state);
-        this.setState({ id: -1, user_id: -1, last_4: 0, brand: '', expired_at: '' });
+        this.setState({ brand: '' });
     }
 
     render() {

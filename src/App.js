@@ -36,6 +36,9 @@ const card = {
   last_4: 0,
   brand: '',
   expired_at: '',
+  print() {
+    console.log("id:" + this.id + " user_id:" + this.user_id + " last_4:" + this.last_4 + " brand:" + this.brand + " expired_at:" + this.expired_at);
+  }
 };
 
 class App extends Component {
@@ -45,6 +48,7 @@ class App extends Component {
     this.handleSend = this.handleSend.bind(this);
     this.handleSendLoginForm = this.handleSendLoginForm.bind(this);
     this.handleSendSigninForm = this.handleSendSigninForm.bind(this);
+    this.handleSendAddCardForm = this.handleSendAddCardForm.bind(this);
   }
 
   /** BUTTON HANDLE */
@@ -61,15 +65,15 @@ class App extends Component {
   }
 
   handleSendSigninForm(obj) {
+    //console.log(`${obj.first_name} Added !`);
     this.addUser(listUsers, obj.first_name, obj.last_name, obj.email, obj.password, false);
-    console.log(`${obj.first_name} Added !`);
     //console.log(`first_name : ${obj.first_name}, last_name : ${obj.last_name}, email : ${obj.email}, password : ${obj.password}`);
     //this.printList(listUsers);
   }
 
   handleSendAddCardForm(obj) {
-    //this.addUser(listUsers, obj.first_name, obj.last_name, obj.email, obj.password, false);
-    console.log(`id ${obj.id}, user_id ${obj.user_id}, last_4 ${obj.last_4}, brand ${obj.brand}, expired_at ${obj.expired_at}`);
+    //console.log(`id ${obj.id}, user_id ${obj.user_id}, last_4 ${obj.last_4}, brand ${obj.brand}, expired_at ${obj.expired_at}`);
+    this.addCard(listCards, 1, obj.brand);
     //console.log(`${obj.first_name} Added !`);
   }
 
@@ -151,6 +155,14 @@ class App extends Component {
     list[index].email = e;
     list[index].password = p;
     list[index].is_admin = ia;
+  }
+
+  addCard(list, user_id, brand) {
+    var id = this.addObjectToList(list, card);
+    var index = this.findIndexObject(list, id);
+    list[index].user_id = user_id;
+    list[index].brand = brand;
+    list[index].print();
   }
 
   /** RENDER */
