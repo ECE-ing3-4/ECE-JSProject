@@ -16,6 +16,7 @@ import withdrawal from './pages/Withdrawal.js';
 import transfer from './pages/Transfer.js';
 import {handleSendLoginForm} from './Function/handlebutton.js';
 
+
 var listUsers = [];
 var listCards = [];
 var currentUser = -1;
@@ -91,6 +92,23 @@ class App extends Component {
       console.log("You have to login first !");
     }
   }
+
+  handleDeleteCardForm(obj) {
+    if (currentUser >0 || true) {
+      for (var i =0; i<listCards.length(); i++)
+        if(currentUser == listCards[i].user_id && listCards[i].last_4 == obj.last_4) {
+          console.log("programmer pour supp la carte");
+        }
+      if ( i==listCards.length() ) {
+        console.log("Card not found");
+      }
+        }
+    
+    else {
+      console.log("Log in first please !");
+    }
+  }
+
 
   handleSend(name, text) {
     this.setState({ chat: this.state.chat.concat(`${name}: ${text}`) });
