@@ -96,15 +96,18 @@ class App extends Component {
   handleDeleteCardForm(obj) {
     if (currentUser > 0 || true) {
       let deletedWell = false;
-      for (var i = 0; i < listCards.length; i++)
+      for (var i = 0; i < listCards.length; i++) {
+
         if (currentUser == listCards[i].user_id && listCards[i].last_4 == obj.last_4) {
           console.log("programmer pour supp la carte");
           deletedWell = true;
         }
+      }
       if (!deletedWell) {
         console.log("Card not found");
       }
     }
+
 
     else {
       console.log("Log in first please !");
@@ -207,7 +210,7 @@ class App extends Component {
   }
 
   lastFourDigits() {
-    return this.getRandom(9000)+1000;
+    return this.getRandom(9000) + 1000;
   }
 
   addCard(list, user_id, brand) {
