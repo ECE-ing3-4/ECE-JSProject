@@ -103,14 +103,11 @@ class App extends Component {
   handleDeleteCardForm(obj) {
     if (currentUser > 0 || true) {
       let deletedWell = false;
-<<<<<<< HEAD
+      console.log(listCards[0].last_4 );
+      console.log(listCards[1].last_4 );
       for (var i = 0; i < listCards.length; i++) {
-
+          console.log(listCards[i].last_4 );
         if (currentUser == listCards[i].user_id && listCards[i].last_4 == obj.last_4) {
-=======
-      for (var i = 0; i < listCards.length; i++)
-        if (currentUser === listCards[i].user_id && listCards[i].last_4 === obj.last_4) {
->>>>>>> d865a9c0b82c479e6ea33d3536581b9bec7bd99a
           console.log("programmer pour supp la carte");
           deletedWell = true;
         }
