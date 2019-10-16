@@ -207,7 +207,7 @@ class App extends Component {
   }
 
   lastFourDigits() {
-    return this.getRandom(10000);
+    return this.getRandom(9000)+1000;
   }
 
   addCard(list, user_id, brand) {
