@@ -3,13 +3,8 @@ import { BrowserRouter, Route, Link } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 export default function modifycard() {
-    constructor(props) {
-        this.state = {value: props.tabcartes[0] }
-        this.handleChange = this.handleChange.bind(this);
-    }
-    
     const tabcartes = [1,2,3];
-
+/*
     handleChange(event) {
         this.setState({value: event.target.value});
     }
@@ -33,4 +28,5 @@ export default function modifycard() {
             } />
         </div>
     )
+    */
 }
