@@ -1,7 +1,6 @@
-import React, { Component } from 'react';
-import { BrowserRouter, Route, Link } from 'react-router-dom';
-import 'bootstrap/dist/css/bootstrap.min.css';
-import LoginForm from '../Forms/LoginForm.js';
+import React from 'react';
+import { Route } from 'react-router-dom';
+import LoginForm from '../forms/LoginForm.js';
 
 export default function login(obj) {
     return (

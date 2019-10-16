@@ -1,7 +1,6 @@
-import React, { Component } from 'react';
-import { BrowserRouter, Route, Link } from 'react-router-dom';
-import 'bootstrap/dist/css/bootstrap.min.css';
-import AddCardForm from '../Forms/AddCardForm.js';
+import React from 'react';
+import { Route } from 'react-router-dom';
+import AddCardForm from '../forms/AddCardForm.js';
 
 export default function addcard(obj) {
   

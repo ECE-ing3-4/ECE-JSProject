@@ -1,7 +1,6 @@
-import React, { Component } from 'react';
-import { BrowserRouter, Route, Link } from 'react-router-dom';
-import 'bootstrap/dist/css/bootstrap.min.css';
-import SignInForm from '../Forms/SignInForm.js';
+import React from 'react';
+import { Route } from 'react-router-dom';
+import SignInForm from '../forms/SignInForm.js';
 
 export default function signin(obj) {
     return (
