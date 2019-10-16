@@ -14,7 +14,7 @@ import balance from './pages/Balance.js';
 import deposit from './pages/Deposit.js';
 import withdrawal from './pages/Withdrawal.js';
 import transfer from './pages/Transfer.js';
-import {handleSendLoginForm} from './Function/handlebutton.js';
+import { handleSendLoginForm } from './Function/handlebutton.js';
 
 
 var listUsers = [];
@@ -66,14 +66,14 @@ class App extends Component {
       console.log("NOPE");
     }
   }
-  
+
   handleSendSigninForm(obj) {
     //console.log(`${obj.first_name} Added !`);
     this.addUser(listUsers, obj.first_name, obj.last_name, obj.email, obj.password, false);
     //console.log(`first_name : ${obj.first_name}, last_name : ${obj.last_name}, email : ${obj.email}, password : ${obj.password}`);
     //this.printList(listUsers);
   }
-  
+
   handleSendAddCardForm(obj) {
     //console.log(`id ${obj.id}, user_id ${obj.user_id}, last_4 ${obj.last_4}, brand ${obj.brand}, expired_at ${obj.expired_at}`);
     this.addCard(listCards, 1, obj.brand);
@@ -94,16 +94,18 @@ class App extends Component {
   }
 
   handleDeleteCardForm(obj) {
-    if (currentUser >0 || true) {
-      for (var i =0; i<listCards.length(); i++)
-        if(currentUser == listCards[i].user_id && listCards[i].last_4 == obj.last_4) {
+    if (currentUser > 0 || true) {
+      let deletedWell = false;
+      for (var i = 0; i < listCards.length; i++)
+        if (currentUser == listCards[i].user_id && listCards[i].last_4 == obj.last_4) {
           console.log("programmer pour supp la carte");
+          deletedWell = true;
         }
-      if ( i==listCards.length() ) {
+      if (!deletedWell) {
         console.log("Card not found");
       }
-        }
-    
+    }
+
     else {
       console.log("Log in first please !");
     }

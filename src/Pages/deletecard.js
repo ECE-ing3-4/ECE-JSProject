@@ -8,7 +8,6 @@ export default function deletecard(obj) {
             <Route exact path="/deletecard" component={() =>
             <>
               <p>Delete a card page WIP</p>
-              <br/>
               <DeleteCardForm onSend={obj.handleDeleteCardForm} />
             </>
           } />
