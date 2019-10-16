@@ -14,8 +14,6 @@ import balance from './pages/Balance.js';
 import deposit from './pages/Deposit.js';
 import withdrawal from './pages/Withdrawal.js';
 import transfer from './pages/Transfer.js';
-import { handleSendLoginForm } from './Function/handlebutton.js';
-
 
 var listUsers = [];
 var listWallets = [];
@@ -71,6 +69,7 @@ class App extends Component {
     //console.log(`email : ${obj.email}, password: ${obj.password}`);
     var id = this.validUser(obj.email, obj.password);
     if (id >= 0) {
+      currentUser = id;
       var index = this.findIndexObject(listUsers, id);
       console.log("Bienvenue " + listUsers[index].first_name);
     }
@@ -83,19 +82,16 @@ class App extends Component {
     //console.log(`${obj.first_name} Added !`);
     this.addUser(listUsers, obj.first_name, obj.last_name, obj.email, obj.password, false);
     this.addWallet(listWallets, 0);
+    this.printList(listUsers);
     //console.log(`first_name : ${obj.first_name}, last_name : ${obj.last_name}, email : ${obj.email}, password : ${obj.password}`);
     //this.printList(listUsers);
   }
 
-  handleSendAddCardForm(obj) {
-    //console.log(`id ${obj.id}, user_id ${obj.user_id}, last_4 ${obj.last_4}, brand ${obj.brand}, expired_at ${obj.expired_at}`);
-    this.addCard(listCards, currentUser, obj.brand);
-    //console.log(`${obj.first_name} Added !`);
-  }
 
   handleSendAddCardForm(obj) {
     if (currentUser > 0 || acceptNotLogin) {
       this.addCard(listCards, currentUser, obj.brand);
+      this.printList(listCards);
     }
     else {
       console.log("You have to login first !");
@@ -129,16 +125,24 @@ class App extends Component {
     for (var i = 0; i < listWallets.length; i++) {
       wallet = listWallets[i];
       if (wallet.user_id === idUser) {
-        return (i);
+        return (wallet);
       }
     }
+    return null;//not found
   }
 
   handleDepositForm(obj) {
     if (currentUser > 0 || acceptNotLogin) {
 
       var wallet = this.findWalletUser(currentUser);
-      wallet.balance += obj.amount;
+      console.log(wallet == null);
+      if (wallet != null) {
+        wallet.balance += parseInt(obj.amount);
+        console.log(wallet);
+      }
+      else {
+        console.log("Create an account first !");//... and this will create a wallet
+      }
     }
 
     else {
@@ -181,12 +185,12 @@ class App extends Component {
     return newId;
   }
 
-  /*printList(list) {
+  printList(list) {
     console.log("la liste : ");
-    list.forEach(function (item, index, list) {
-      item.print();
-    });
-  }*/
+    for (var i = 0; i < list.length; i++) {
+      console.log(list[i].print());
+    }
+  }
 
   findObject(list, idSearched) {
     var item;
