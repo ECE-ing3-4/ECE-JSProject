@@ -14,6 +14,7 @@ import balance from './pages/Balance.js';
 import deposit from './pages/Deposit.js';
 import withdrawal from './pages/Withdrawal.js';
 import transfer from './pages/Transfer.js';
+import {handleSendLoginForm} from './Function/handlebutton.js';
 
 var listUsers = [];
 var listCards = [];
@@ -58,12 +59,24 @@ class App extends Component {
     var id = this.validUser(obj.email, obj.password);
     if (id >= 0) {
       var index = this.findIndexObject(listUsers, id);
-      currentUser = id;
-      console.log("Current user : " + listUsers[index].first_name + " with id : " + id);
+      console.log("Bienvenue " + listUsers[index].first_name);
     }
     else {
-      console.log("INVALID USER");
+      console.log("NOPE");
     }
+  }
+  
+  handleSendSigninForm(obj) {
+    //console.log(`${obj.first_name} Added !`);
+    this.addUser(listUsers, obj.first_name, obj.last_name, obj.email, obj.password, false);
+    //console.log(`first_name : ${obj.first_name}, last_name : ${obj.last_name}, email : ${obj.email}, password : ${obj.password}`);
+    //this.printList(listUsers);
+  }
+  
+  handleSendAddCardForm(obj) {
+    //console.log(`id ${obj.id}, user_id ${obj.user_id}, last_4 ${obj.last_4}, brand ${obj.brand}, expired_at ${obj.expired_at}`);
+    this.addCard(listCards, 1, obj.brand);
+    //console.log(`${obj.first_name} Added !`);
   }
 
   handleSendSigninForm(obj) {
@@ -78,8 +91,6 @@ class App extends Component {
       console.log("You have to login first !");
     }
   }
-
-
 
   handleSend(name, text) {
     this.setState({ chat: this.state.chat.concat(`${name}: ${text}`) });

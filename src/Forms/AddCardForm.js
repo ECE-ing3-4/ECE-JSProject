@@ -21,11 +21,9 @@ class AddCardForm extends Component {
     render() {
         return (
             <div>
-                <div>
-                    Brand <input type="text" name="brand" onChange={this.handleChange} value={this.state.brand} />
-                    <br />
-                    <button onClick={this.handleSendForm}>Envoyer</button>
-                </div>
+                Brand <input type="text" name="brand" onChange={this.handleChange} value={this.state.brand} />
+                <br />
+                <button onClick={this.handleSendForm}>Envoyer</button>
             </div>
         );
     }
