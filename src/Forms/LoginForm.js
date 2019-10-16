@@ -26,7 +26,7 @@ class LoginForm extends Component {
                     <br/>
                     Password <input type="text" name="password" onChange={this.handleChange} value={this.state.password} />
                     <br/>
-                    <button onClick={this.handleSendForm}>Envoyer</button>
+                    <button onClick={this.handleSendForm}>Se connecter</button>
                 </div>
             </div>
         );

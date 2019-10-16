@@ -23,7 +23,7 @@ class AddCardForm extends Component {
             <div>
                 Brand <input type="text" name="brand" onChange={this.handleChange} value={this.state.brand} />
                 <br />
-                <button onClick={this.handleSendForm}>Envoyer</button>
+                <button onClick={this.handleSendForm}>Ajouter la carte</button>
             </div>
         );
     }

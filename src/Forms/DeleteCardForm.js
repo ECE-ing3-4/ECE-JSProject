@@ -23,7 +23,7 @@ class DeleteCardForm extends Component {
 
                 Last 4 digits of your card: <input type="text" name="last_4" onChange={this.handleChange} value={this.state.last_4} />
                 <br />
-                <button onClick={this.handleSendForm}> Supprimer la carte </button>
+                <button onClick={this.handleSendForm}>Supprimer la carte</button>
 
             </div>
         );

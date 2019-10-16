@@ -30,7 +30,7 @@ class SignInForm extends Component {
                     <br />
                     Password <input type="text" name="password" onChange={this.handleChange} value={this.state.password} />
                     <br />
-                    <button onClick={this.handleSendForm}>Envoyer</button>
+                    <button onClick={this.handleSendForm}>S'inscrire</button>
                 </div>
             </div>
         );
