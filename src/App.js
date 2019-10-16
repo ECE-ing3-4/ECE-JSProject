@@ -116,11 +116,10 @@ class App extends Component {
       if (!deletedWell) {
         console.log("Card not found");
       }
-    }
-
 
     else {
       console.log("Log in first please !");
+      }
     }
   }
 
