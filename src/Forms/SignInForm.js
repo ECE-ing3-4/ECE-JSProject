@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-class LoginForm extends Component {
+class SignInForm extends Component {
     constructor(props) {
         super(props)
         this.state = { first_name: '', last_name: '', email: '', password: '' };
@@ -22,13 +22,13 @@ class LoginForm extends Component {
         return (
             <div>
                 <div>
-                    first_name <input type="text" name="first_name" onChange={this.handleChange} value={this.state.first_name} />
+                    First name <input type="text" name="first_name" onChange={this.handleChange} value={this.state.first_name} />
                     <br />
-                    last_name <input type="text" name="last_name" onChange={this.handleChange} value={this.state.last_name} />
+                    Last name <input type="text" name="last_name" onChange={this.handleChange} value={this.state.last_name} />
                     <br />
-                    email <input type="text" name="email" onChange={this.handleChange} value={this.state.email} />
+                    Email <input type="text" name="email" onChange={this.handleChange} value={this.state.email} />
                     <br />
-                    password <input type="text" name="password" onChange={this.handleChange} value={this.state.password} />
+                    Password <input type="text" name="password" onChange={this.handleChange} value={this.state.password} />
                     <br />
                     <button onClick={this.handleSendForm}>Envoyer</button>
                 </div>
@@ -36,4 +36,4 @@ class LoginForm extends Component {
         );
     }
 }
-export default LoginForm
+export default SignInForm

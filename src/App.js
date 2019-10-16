@@ -3,6 +3,7 @@ import { BrowserRouter, Route, Link } from 'react-router-dom';
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import links from './Pages/links.js';
+
 import Signin from './Pages/Signin.js';
 import login from './Pages/login.js';
 import modifyaccount from './Pages/modifyaccount.js';
@@ -13,9 +14,9 @@ import balance from './Pages/balance.js';
 import deposit from './Pages/deposit.js';
 import withdrawal from './Pages/withdrawal.js';
 import transfer from './Pages/transfer.js';
-import { linkSync } from 'fs';
 
 var listUsers = [];
+var listCards = [];
 
 const user = {
   id: -1,
@@ -23,10 +24,18 @@ const user = {
   last_name: 'string',
   email: 'email, string unique',
   password: 'string',
-  is_admin: 'boolean',
+  is_admin: false,
   print() {
     console.log("id:" + this.id + " first_name:" + this.first_name + " last_name:" + this.last_name + " email:" + this.email + " password:" + this.password + " is_admin:" + this.is_admin);
   }
+};
+
+const card = {
+  id: -1,
+  user_id: -1,
+  last_4: 0,
+  brand: '',
+  expired_at: '',
 };
 
 class App extends Component {
@@ -58,6 +67,12 @@ class App extends Component {
     //this.printList(listUsers);
   }
 
+  handleSendAddCardForm(obj) {
+    //this.addUser(listUsers, obj.first_name, obj.last_name, obj.email, obj.password, false);
+    console.log(`id ${obj.id}, user_id ${obj.user_id}, last_4 ${obj.last_4}, brand ${obj.brand}, expired_at ${obj.expired_at}`);
+    //console.log(`${obj.first_name} Added !`);
+  }
+
   handleSend(name, text) {
     this.setState({ chat: this.state.chat.concat(`${name}: ${text}`) });
   }
@@ -85,7 +100,7 @@ class App extends Component {
     }
     newId += 1;
 
-    list.push(Object.create(object));
+    list.push(object);
     list[newIndex].id = newId;
 
     return newId;
@@ -129,7 +144,7 @@ class App extends Component {
   }
 
   addUser(list, fn, ln, e, p, ia) {
-    var id = this.addObjectToList(list, user)
+    var id = this.addObjectToList(list, user);
     var index = this.findIndexObject(list, id);
     list[index].first_name = fn;
     list[index].last_name = ln;
@@ -148,7 +163,7 @@ class App extends Component {
           {Signin(this)}
           {login(this)}
           {modifyaccount()}
-          {addcard()}
+          {addcard(this)}
           {modifycard()}
           {deletecard()}
           {balance()}
