@@ -17,6 +17,7 @@ import transfer from './pages/Transfer.js';
 
 var listUsers = [];
 var listCards = [];
+var currentUser = -1;
 
 const user = {
   id: -1,
@@ -26,7 +27,7 @@ const user = {
   password: 'string',
   is_admin: false,
   print() {
-    console.log("id:" + this.id + " first_name:" + this.first_name + " last_name:" + this.last_name + " email:" + this.email + " password:" + this.password + " is_admin:" + this.is_admin);
+    console.log("USER : id:" + this.id + " first_name:" + this.first_name + " last_name:" + this.last_name + " email:" + this.email + " password:" + this.password + " is_admin:" + this.is_admin);
   }
 };
 
@@ -37,7 +38,7 @@ const card = {
   brand: '',
   expired_at: '',
   print() {
-    console.log("id:" + this.id + " user_id:" + this.user_id + " last_4:" + this.last_4 + " brand:" + this.brand + " expired_at:" + this.expired_at);
+    console.log("CARD : id:" + this.id + " user_id:" + this.user_id + " last_4:" + this.last_4 + " brand:" + this.brand + " expired_at:" + this.expired_at);
   }
 };
 
@@ -57,24 +58,25 @@ class App extends Component {
     var id = this.validUser(obj.email, obj.password);
     if (id >= 0) {
       var index = this.findIndexObject(listUsers, id);
-      console.log("Bienvenue " + listUsers[index].first_name);
+      currentUser = id;
+      console.log("Current user : " + listUsers[index].first_name + " with id : " + id);
     }
     else {
-      console.log("NOPE");
+      console.log("INVALID USER");
     }
   }
 
   handleSendSigninForm(obj) {
-    //console.log(`${obj.first_name} Added !`);
     this.addUser(listUsers, obj.first_name, obj.last_name, obj.email, obj.password, false);
-    //console.log(`first_name : ${obj.first_name}, last_name : ${obj.last_name}, email : ${obj.email}, password : ${obj.password}`);
-    //this.printList(listUsers);
   }
 
   handleSendAddCardForm(obj) {
-    //console.log(`id ${obj.id}, user_id ${obj.user_id}, last_4 ${obj.last_4}, brand ${obj.brand}, expired_at ${obj.expired_at}`);
-    this.addCard(listCards, 1, obj.brand);
-    //console.log(`${obj.first_name} Added !`);
+    if (currentUser > 0 || true) {
+      this.addCard(listCards, currentUser, obj.brand);
+    }
+    else {
+      console.log("You have to login first !");
+    }
   }
 
 
@@ -146,7 +148,7 @@ class App extends Component {
     list[index].email = e;
     list[index].password = p;
     list[index].is_admin = ia;
-    //listUsers[index].print();
+    list[index].print();
   }
 
   addUser(list, fn, ln, e, p, ia) {
@@ -157,6 +159,7 @@ class App extends Component {
     list[index].email = e;
     list[index].password = p;
     list[index].is_admin = ia;
+    list[index].print();
   }
 
   getRandom(max) {
@@ -168,7 +171,7 @@ class App extends Component {
     const current_date = { mm: -1, yyyy: -1 };
     current_date.mm = this.getRandom(12) + 1;
     current_date.yyyy = ladate.getFullYear() + (this.getRandom(3) + 1);
-    console.log('La date d expiration  est le ', current_date.mm, ' / ', current_date.yyyy)
+    //console.log('La date d expiration  est le ', current_date.mm, ' / ', current_date.yyyy)
     return (current_date.mm + '/' + current_date.yyyy);
   }
 
@@ -190,7 +193,7 @@ class App extends Component {
   render() {
     return (
       <BrowserRouter>
-        <div>        
+        <div>
           {links()}
 
           {Signin(this)}
