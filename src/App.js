@@ -4,7 +4,7 @@ import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import links from './pages/Links.js';
 
-import Signin from './pages/Signin.js';
+import Signin from './pages/SignUp.js';
 import login from './pages/Login.js';
 import modifyaccount from './pages/ModifyAccount.js';
 import addcard from './pages/AddCard.js';
@@ -124,7 +124,7 @@ class App extends Component {
     var wallet;
     for (var i = 0; i < listWallets.length; i++) {
       wallet = listWallets[i];
-      if (wallet.user_id === idUser) {
+      if (wallet.user_id == idUser) {
         return (wallet);
       }
     }
@@ -152,16 +152,16 @@ class App extends Component {
   }
 
 
-  /*handleSend(name, text) {
+  handleSend(name, text) {
     this.setState({ chat: this.state.chat.concat(`${name}: ${text}`) });
-  }*/
+  }
 
   /** LISTS MANIPULATION */
   validUser(mail, pswd) {
     var item;
     for (var i = 0; i < listUsers.length; i++) {
       item = listUsers[i];
-      if (item.email === mail & item.password === pswd) {
+      if (item.email == mail & item.password == pswd) {
         return item.id;
       }
     }
@@ -171,6 +171,7 @@ class App extends Component {
   addObjectToList(list, object) {
     var newIndex = list.length;//number of item, but list[0] is the first one
     var newId = 0;
+    console.log(list);
 
     for (var i = 0; i < newIndex; i++) {
       if (list[i].id > newId) {
@@ -188,28 +189,35 @@ class App extends Component {
   printList(list) {
     console.log("la liste : ");
     for (var i = 0; i < list.length; i++) {
-      console.log(list[i].print());
+      list[i].print();
     }
+    console.log("fin liste");
   }
 
   findObject(list, idSearched) {
     var item;
     for (var i = 0; i < list.length; i++) {
       item = list[i];
-      if (item.id === idSearched) {
+      if (item.id == idSearched) {
         return (item)
       }
     }
   }
 
   findIndexObject(list, idSearched) {
+    //console.log("DEBUT FOR");
     var item;
     for (var i = 0; i < list.length; i++) {
       item = list[i];
-      if (item.id === idSearched) {
+      //item.print();
+      //console.log(item.id + " vs " + idSearched);
+      if (item.id == idSearched) {
+        //console.log("FIN FOR TROUVE");
         return (i);
       }
     }
+    //console.log("FIN FOR NON TROUVE");
+    return -1;
   }
 
   editUser(list, idU, fn, ln, e, p, ia) {
@@ -260,6 +268,7 @@ class App extends Component {
   addCard(list, user_id, brand) {
     var id = this.addObjectToList(list, card);
     var index = this.findIndexObject(list, id);
+    console.log("ID " + id + " INDEX " + index);
     list[index].user_id = user_id;
     list[index].brand = brand;
     list[index].last_4 = this.lastFourDigits();
