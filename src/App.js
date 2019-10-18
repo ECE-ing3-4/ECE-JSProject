@@ -19,7 +19,7 @@ var listUsers = [];
 var listWallets = [];
 var listCards = [];
 var currentUser = -1;
-var acceptNotLogin = true;//debug
+var acceptNotLogin = false;//debug
 
 const user = {
   id: -1,
@@ -71,20 +71,19 @@ class App extends Component {
     if (id >= 0) {
       currentUser = id;
       var index = this.findIndexObject(listUsers, id);
-      alert("Bienvenue " + listUsers[index].first_name);
+      alert("Welcome " + listUsers[index].first_name);
     }
     else {
-      alert("NOPE");
+      alert("Invalid credentials !");
     }
   }
 
   handleSendSignupForm(obj) {
-    //console.log(`${obj.first_name} Added !`);
-    this.addUser(listUsers, obj.first_name, obj.last_name, obj.email, obj.password, false);
-    this.addWallet(listWallets, 0);
-    this.printList(listUsers);
-    //console.log(`first_name : ${obj.first_name}, last_name : ${obj.last_name}, email : ${obj.email}, password : ${obj.password}`);
-    //this.printList(listUsers);
+    alert(`Account created : ${obj.first_name}`);
+    var indexNewUser = this.addUser(listUsers, obj.first_name, obj.last_name, obj.email, obj.password, false);
+    var newId=listUsers[indexNewUser].id;
+    var indexNewWallet = this.addWallet(listWallets, 0);
+    listWallets[indexNewWallet].user_id=newId;
   }
 
 
@@ -94,7 +93,7 @@ class App extends Component {
       this.printList(listCards);
     }
     else {
-      console.log("You have to login first !");
+      alert("You have to login first !");
     }
   }
 
@@ -139,9 +138,10 @@ class App extends Component {
       if (wallet != null) {
         wallet.balance += parseInt(obj.amount);
         console.log(wallet);
+        alert(`Succesfully deposited ${obj.amount} !`)
       }
       else {
-        alert("Create an account first !");//... and this will create a wallet
+        alert("Log in first !");
       }
     }
 
@@ -227,7 +227,7 @@ class App extends Component {
     list[index].email = e;
     list[index].password = p;
     list[index].is_admin = ia;
-    list[index].print();
+    //list[index].print();
   }
 
   addUser(list, fn, ln, e, p, ia) {
@@ -238,14 +238,17 @@ class App extends Component {
     list[index].email = e;
     list[index].password = p;
     list[index].is_admin = ia;
-    list[index].print();
+    //list[index].print();
+    return index;
   }
 
   addWallet(list, bal) {
     var id = this.addObjectToList(list, wallet);
     var index = this.findIndexObject(list, id);
     list[index].balance = bal;
-    list[index].print();
+    //list[index].user_id=currentUser;//inutile car on vient de sign up, pas de log in
+    //list[index].print();
+    return index;
   }
 
   getRandom(max) {
@@ -268,12 +271,12 @@ class App extends Component {
   addCard(list, user_id, brand) {
     var id = this.addObjectToList(list, card);
     var index = this.findIndexObject(list, id);
-    console.log("ID " + id + " INDEX " + index);
+    //console.log("ID " + id + " INDEX " + index);
     list[index].user_id = user_id;
     list[index].brand = brand;
     list[index].last_4 = this.lastFourDigits();
     list[index].expired_at = this.getDateExp();
-    list[index].print();
+    //list[index].print();
   }
 
   connected() {
@@ -282,6 +285,12 @@ class App extends Component {
 
   acceptNotLoginFnc(){
     return acceptNotLogin;
+  }
+
+  getCurrentBalance(){
+    var wallet = this.findWalletUser(currentUser);
+    
+    return wallet.balance;
   }
 
   /** RENDER */

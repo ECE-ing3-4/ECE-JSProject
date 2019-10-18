@@ -1,4 +1,8 @@
 A FAIRE:
 	Wallets
-		Retrait
+		Retrait (Neil WIP)
 		Transfert
+
+
+
+WIP = work in progress = en cours
