@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 export default function links() {
   return (
     <div >
+      
       <li><Link to="/signup">Sign up</Link></li>
       <li><Link to="/login">Log in</Link></li>
 

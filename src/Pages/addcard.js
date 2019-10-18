@@ -3,14 +3,16 @@ import { Route } from 'react-router-dom';
 import AddCardForm from '../forms/AddCardForm.js';
 
 export default function addcard(obj) {
-    return (
-        <div>
-            <Route exact path="/Addcard" component={() =>
-            <>
-              <p>Add a card page</p>
-              <AddCardForm onSend={obj.handleSendAddCardForm} />
-            </>
-          } />
-        </div>
-    )
+  return (
+    <div>
+      <Route exact path="/Addcard" component={() =>
+        <>
+          <p>Add a card page</p>
+          {obj.connected() || obj.acceptNotLoginFnc() ?
+            <AddCardForm onSend={obj.handleSendAddCardForm} />
+            : "Connection requise"}
+        </>
+      } />
+    </div>
+  )
 }

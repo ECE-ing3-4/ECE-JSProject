@@ -59,7 +59,7 @@ class App extends Component {
     this.state = { chat: [] };;
     //this.handleSend = this.handleSend.bind(this);
     this.handleSendLoginForm = this.handleSendLoginForm.bind(this);
-    this.handleSendSigninForm = this.handleSendSigninForm.bind(this);
+    this.handleSendSignupForm = this.handleSendSignupForm.bind(this);
     this.handleSendAddCardForm = this.handleSendAddCardForm.bind(this);
     this.handleDepositForm = this.handleDepositForm.bind(this);
   }
@@ -71,14 +71,14 @@ class App extends Component {
     if (id >= 0) {
       currentUser = id;
       var index = this.findIndexObject(listUsers, id);
-      console.log("Bienvenue " + listUsers[index].first_name);
+      alert("Bienvenue " + listUsers[index].first_name);
     }
     else {
-      console.log("NOPE");
+      alert("NOPE");
     }
   }
 
-  handleSendSigninForm(obj) {
+  handleSendSignupForm(obj) {
     //console.log(`${obj.first_name} Added !`);
     this.addUser(listUsers, obj.first_name, obj.last_name, obj.email, obj.password, false);
     this.addWallet(listWallets, 0);
@@ -106,16 +106,16 @@ class App extends Component {
       for (var i = 0; i < listCards.length; i++) {
         console.log(listCards[i].last_4);
         if (currentUser == listCards[i].user_id && listCards[i].last_4 == obj.last_4) {
-          console.log("programmer pour supp la carte");
+          alert("programmer pour supp la carte");
           deletedWell = true;
         }
       }
       if (!deletedWell) {
-        console.log("Card not found");
+        alert("Card not found");
       }
 
       else {
-        console.log("Log in first please !");
+        alert("Log in first please !");
       }
     }
   }
@@ -141,12 +141,12 @@ class App extends Component {
         console.log(wallet);
       }
       else {
-        console.log("Create an account first !");//... and this will create a wallet
+        alert("Create an account first !");//... and this will create a wallet
       }
     }
 
     else {
-      console.log("Log in first please !");
+      alert("Log in first please !");
     }
 
   }
@@ -276,23 +276,30 @@ class App extends Component {
     list[index].print();
   }
 
+  connected() {
+    return (currentUser > 0);
+  }
+
+  acceptNotLoginFnc(){
+    return acceptNotLogin;
+  }
+
   /** RENDER */
   render() {
     return (
       <BrowserRouter>
         <div>
           {links()}
-
           {Signin(this)}
           {login(this)}
-          {modifyaccount()}
+          {modifyaccount(this)}
           {addcard(this)}
-          {modifycard()}
+          {modifycard(this)}
           {deletecard(this)}
-          {balance()}
+          {balance(this)}
           {deposit(this)}
-          {withdrawal()}
-          {transfer()}
+          {withdrawal(this)}
+          {transfer(this)}
         </div>
       </BrowserRouter>
     );

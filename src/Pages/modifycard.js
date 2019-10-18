@@ -1,14 +1,17 @@
 import React from 'react';
 import { Route } from 'react-router-dom';
 
-export default function modifycard() {
+export default function modifycard(obj) {
     return (
         <div>
             <Route exact path="/modifycard" component={() =>
-            <>
-              <p>Modify card WIP</p>
-            </>
-          } />
+                <>
+                    <p>Modify card</p>
+                    {obj.connected() || obj.acceptNotLoginFnc() ?
+                        "WIP"
+                        : "Connection requise"}
+                </>
+            } />
         </div>
     )
     /*

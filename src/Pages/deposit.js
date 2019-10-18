@@ -3,14 +3,16 @@ import { Route } from 'react-router-dom';
 import DepositForm from '../forms/DepositForm.js';
 
 export default function deposit(obj) {
-    return (
-        <div>
-            <Route exact path="/deposit" component={() =>
-            <>
-              <p>Deposit page WIP</p>
-              <DepositForm onSend={obj.handleDepositForm} />
-            </>
-          } />
-        </div>
-    )
+  return (
+    <div>
+      <Route exact path="/deposit" component={() =>
+        <>
+          <p>Deposit page WIP</p>
+          {obj.connected() || obj.acceptNotLoginFnc() ?
+            <DepositForm onSend={obj.handleDepositForm} />
+            : "Connection requise"}
+        </>
+      } />
+    </div>
+  )
 }
