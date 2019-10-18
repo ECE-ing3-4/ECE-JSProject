@@ -21,6 +21,7 @@ var listCards = [];
 var currentUser = -1;
 var acceptNotLogin = false;//debug
 
+/*
 const user = {
   id: -1,
   first_name: 'string',
@@ -52,7 +53,7 @@ const wallet = {
     console.log("WALLET : id:" + this.id + " user_id:" + this.user_id + " balance:" + this.balance);
   }
 };
-
+*/
 class App extends Component {
   constructor(props) {
     super(props);
@@ -81,7 +82,6 @@ class App extends Component {
 
   handleSendSignupForm(obj) {
     //Adding user
-    alert("ON AJOUTE UN UTILISATEUR");
     console.log(listUsers);
     var indexNewUser = this.addUser(listUsers, obj.first_name, obj.last_name, obj.email, obj.password, false);
     var newId = listUsers[indexNewUser].id;
@@ -95,7 +95,7 @@ class App extends Component {
   handleSendAddCardForm(obj) {
     if (currentUser > 0 || acceptNotLogin) {
       this.addCard(listCards, currentUser, obj.brand);
-      this.printList(listCards);
+      //this.printList(listCards);
     }
     else {
       alert("You have to login first !");
@@ -105,10 +105,10 @@ class App extends Component {
   handleDeleteCardForm(obj) {
     if (currentUser > 0 || acceptNotLogin) {
       let deletedWell = false;
-      console.log(listCards[0].last_4);
-      console.log(listCards[1].last_4);
+      //console.log(listCards[0].last_4);
+      //console.log(listCards[1].last_4);
       for (var i = 0; i < listCards.length; i++) {
-        console.log(listCards[i].last_4);
+        //console.log(listCards[i].last_4);
         if (currentUser == listCards[i].user_id && listCards[i].last_4 == obj.last_4) {
           alert("programmer pour supp la carte");
           deletedWell = true;
@@ -229,17 +229,28 @@ class App extends Component {
     return -1;
   }
 
-  editUser(list, idU, fn, ln, e, p, ia) {
-    var index = this.findIndexObject(list, idU);
-    list[index].first_name = fn;
-    list[index].last_name = ln;
-    list[index].email = e;
-    list[index].password = p;
-    list[index].is_admin = ia;
+  editUser(userItem, fn, ln, e, p, ia) {
+    userItem.first_name = fn;
+    userItem.last_name = ln;
+    userItem.email = e;
+    userItem.password = p;
+    userItem.is_admin = ia;
     //list[index].print();
   }
 
   addUser(list, fn, ln, e, p, ia) {
+    var user = {
+      id: -1,
+      first_name: 'string',
+      last_name: 'string',
+      email: 'email, string unique',
+      password: 'string',
+      is_admin: false,
+      print() {
+        console.log("USER : id:" + this.id + " first_name:" + this.first_name + " last_name:" + this.last_name + " email:" + this.email + " password:" + this.password + " is_admin:" + this.is_admin);
+      }
+    };
+
     var id = this.addObjectToList(list, user);
     var index = this.findIndexObject(list, id);
     list[index].first_name = fn;
@@ -252,6 +263,15 @@ class App extends Component {
   }
 
   addWallet(list, bal) {
+    var wallet = {
+      id: -1,
+      user_id: -1,
+      balance: 0,
+      print() {
+        console.log("WALLET : id:" + this.id + " user_id:" + this.user_id + " balance:" + this.balance);
+      }
+    };
+
     var id = this.addObjectToList(list, wallet);
     var index = this.findIndexObject(list, id);
     list[index].balance = bal;
@@ -278,6 +298,17 @@ class App extends Component {
   }
 
   addCard(list, user_id, brand) {
+    var card = {
+      id: -1,
+      user_id: -1,
+      last_4: 0,
+      brand: '',
+      expired_at: '',
+      print() {
+        console.log("CARD : id:" + this.id + " user_id:" + this.user_id + " last_4:" + this.last_4 + " brand:" + this.brand + " expired_at:" + this.expired_at);
+      }
+    };
+
     var id = this.addObjectToList(list, card);
     var index = this.findIndexObject(list, id);
     //console.log("ID " + id + " INDEX " + index);

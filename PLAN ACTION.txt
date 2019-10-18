@@ -2,9 +2,4 @@ A FAIRE:
 	Wallets
 		Transfert
 
-Problème à résoudre:
-	quand on addUser pour la 1ère fois, la liste n'est pas vide (resoudre ce problème devrait résoudre celui des cards)
-	pas testé mais le même problème pour les wallets serai logique.
--> il faut tracer listeUSer pour voir quand elle est modifiée
-
 WIP = work in progress = en cours
