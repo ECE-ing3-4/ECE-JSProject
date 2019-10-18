@@ -1,5 +1,8 @@
 A FAIRE:
 	Wallets
 		Transfert
+	Cards 
+		supprimer carte
+		modifier cards
 
 WIP = work in progress = en cours
