@@ -80,11 +80,15 @@ class App extends Component {
   }
 
   handleSendSignupForm(obj) {
-    alert(`Account created : ${obj.first_name}`);
+    //Adding user
+    alert("ON AJOUTE UN UTILISATEUR");
+    console.log(listUsers);
     var indexNewUser = this.addUser(listUsers, obj.first_name, obj.last_name, obj.email, obj.password, false);
     var newId = listUsers[indexNewUser].id;
+    //Ading wallet
     var indexNewWallet = this.addWallet(listWallets, 0);
     listWallets[indexNewWallet].user_id = newId;
+    alert(`Account created : ${obj.first_name}`);
   }
 
 
@@ -178,7 +182,6 @@ class App extends Component {
   addObjectToList(list, object) {
     var newIndex = list.length;//number of item, but list[0] is the first one
     var newId = 0;
-    console.log(list);
 
     for (var i = 0; i < newIndex; i++) {
       if (list[i].id > newId) {
@@ -189,7 +192,6 @@ class App extends Component {
 
     list.push(object);
     list[newIndex].id = newId;
-
     return newId;
   }
 
