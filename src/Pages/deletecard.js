@@ -7,7 +7,7 @@ export default function deletecard(obj) {
     <div>
       <Route exact path="/deletecard" component={() =>
         <>
-          <p>Delete a card page WIP</p>
+          <p>Delete a card page</p>
           {obj.connected() || obj.acceptNotLoginFnc() ?
             <DeleteCardForm onSend={obj.handleDeleteCardForm} />
             : "Connection requise"}

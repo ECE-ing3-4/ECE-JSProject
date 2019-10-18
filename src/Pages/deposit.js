@@ -7,7 +7,7 @@ export default function deposit(obj) {
     <div>
       <Route exact path="/deposit" component={() =>
         <>
-          <p>Deposit page WIP</p>
+          <p>Deposit page</p>
           {obj.connected() || obj.acceptNotLoginFnc() ?
             <DepositForm onSend={obj.handleDepositForm} />
             : "Connection requise"}

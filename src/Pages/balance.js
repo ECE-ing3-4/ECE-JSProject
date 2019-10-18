@@ -6,7 +6,7 @@ export default function balance(obj) {
     <div>
       <Route exact path="/balance" component={() =>
         <>
-          <p>Balance page WIP</p>
+          <p>Balance page</p>
           {obj.connected() || obj.acceptNotLoginFnc() ?
             <p>Your currrent balance is {obj.getCurrentBalance()} usd</p>
             : "Connection requise"}

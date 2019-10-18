@@ -62,6 +62,7 @@ class App extends Component {
     this.handleSendSignupForm = this.handleSendSignupForm.bind(this);
     this.handleSendAddCardForm = this.handleSendAddCardForm.bind(this);
     this.handleDepositForm = this.handleDepositForm.bind(this);
+    this.handleWithdrawalForm = this.handleWithdrawalForm.bind(this);
   }
 
   /** BUTTON HANDLE */
@@ -81,9 +82,9 @@ class App extends Component {
   handleSendSignupForm(obj) {
     alert(`Account created : ${obj.first_name}`);
     var indexNewUser = this.addUser(listUsers, obj.first_name, obj.last_name, obj.email, obj.password, false);
-    var newId=listUsers[indexNewUser].id;
+    var newId = listUsers[indexNewUser].id;
     var indexNewWallet = this.addWallet(listWallets, 0);
-    listWallets[indexNewWallet].user_id=newId;
+    listWallets[indexNewWallet].user_id = newId;
   }
 
 
@@ -134,21 +135,27 @@ class App extends Component {
     if (currentUser > 0 || acceptNotLogin) {
 
       var wallet = this.findWalletUser(currentUser);
-      console.log(wallet == null);
       if (wallet != null) {
         wallet.balance += parseInt(obj.amount);
-        console.log(wallet);
-        alert(`Succesfully deposited ${obj.amount} !`)
+        if (obj.amount > 0) {
+          alert(`Succesfully deposited ${obj.amount} !`)
+        }
+        else {
+          alert(`Succesfully withdrawed ${-obj.amount} !`)
+        }
       }
       else {
         alert("Log in first !");
       }
     }
-
     else {
       alert("Log in first please !");
     }
+  }
 
+  handleWithdrawalForm(obj) {
+    obj.amount = - obj.amount;
+    this.handleDepositForm(obj);
   }
 
 
@@ -283,13 +290,13 @@ class App extends Component {
     return (currentUser > 0);
   }
 
-  acceptNotLoginFnc(){
+  acceptNotLoginFnc() {
     return acceptNotLogin;
   }
 
-  getCurrentBalance(){
+  getCurrentBalance() {
     var wallet = this.findWalletUser(currentUser);
-    
+
     return wallet.balance;
   }
 
