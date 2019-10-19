@@ -70,7 +70,7 @@ class App extends Component {
   handleSendLoginForm(obj) {
     //console.log(`email : ${obj.email}, password: ${obj.password}`);
     var id = this.validUser(obj.email, obj.password);
-    if (id >= 0) {
+    if (id >= 0) {//if valid
       currentUser = id;
       var index = this.findIndexObject(listUsers, id);
       alert("Welcome " + listUsers[index].first_name);
@@ -84,11 +84,14 @@ class App extends Component {
     //Adding user
     console.log(listUsers);
     var indexNewUser = this.addUser(listUsers, obj.first_name, obj.last_name, obj.email, obj.password, false);
-    var newId = listUsers[indexNewUser].id;
-    //Ading wallet
-    var indexNewWallet = this.addWallet(listWallets, 0);
-    listWallets[indexNewWallet].user_id = newId;
-    alert(`Account created : ${obj.first_name}`);
+    if (indexNewUser >= 0) {//user addded succefully
+      var newId = listUsers[indexNewUser].id;
+      //Ading wallet
+      var indexNewWallet = this.addWallet(listWallets, 0);
+      listWallets[indexNewWallet].user_id = newId;
+      //alert(`Account created : ${obj.first_name}`);
+      this.handleSendLoginForm(obj)//autologin
+    }
   }
 
 
@@ -136,7 +139,11 @@ class App extends Component {
   }
 
   handleDepositForm(obj) {
-    if (currentUser > 0 || acceptNotLogin) {
+    alert(obj.amount);
+    if (obj.amount < 0) {
+      alert("Invalid amount !");
+    }
+    else if (currentUser > 0 || acceptNotLogin) {
 
       var wallet = this.findWalletUser(currentUser);
       if (wallet != null) {
@@ -172,8 +179,13 @@ class App extends Component {
     var item;
     for (var i = 0; i < listUsers.length; i++) {
       item = listUsers[i];
-      if (item.email == mail & item.password == pswd) {
-        return item.id;
+      if (item.email == mail) {//the user exists
+        if (item.password == pswd) {//valid password
+          return item.id;
+        }
+        else {//invalid password
+          return -2;
+        }
       }
     }
     return -1;
@@ -239,27 +251,33 @@ class App extends Component {
   }
 
   addUser(list, fn, ln, e, p, ia) {
-    var user = {
-      id: -1,
-      first_name: 'string',
-      last_name: 'string',
-      email: 'email, string unique',
-      password: 'string',
-      is_admin: false,
-      print() {
-        console.log("USER : id:" + this.id + " first_name:" + this.first_name + " last_name:" + this.last_name + " email:" + this.email + " password:" + this.password + " is_admin:" + this.is_admin);
-      }
-    };
+    if (this.validUser(e, "") == -1) {//email not found
+      var user = {
+        id: -1,
+        first_name: 'string',
+        last_name: 'string',
+        email: 'email, string unique',
+        password: 'string',
+        is_admin: false,
+        print() {
+          console.log("USER : id:" + this.id + " first_name:" + this.first_name + " last_name:" + this.last_name + " email:" + this.email + " password:" + this.password + " is_admin:" + this.is_admin);
+        }
+      };
 
-    var id = this.addObjectToList(list, user);
-    var index = this.findIndexObject(list, id);
-    list[index].first_name = fn;
-    list[index].last_name = ln;
-    list[index].email = e;
-    list[index].password = p;
-    list[index].is_admin = ia;
-    //list[index].print();
-    return index;
+      var id = this.addObjectToList(list, user);
+      var index = this.findIndexObject(list, id);
+      list[index].first_name = fn;
+      list[index].last_name = ln;
+      list[index].email = e;
+      list[index].password = p;
+      list[index].is_admin = ia;
+      //list[index].print();
+      return index;
+    }
+    else {
+      alert("This email is already used !");
+      return -1;
+    }
   }
 
   addWallet(list, bal) {

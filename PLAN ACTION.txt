@@ -1,8 +1,16 @@
 A FAIRE:
+	Modify account
 	Wallets
 		Transfert
 	Cards 
 		supprimer carte
 		modifier cards
+	blindage champs vides ou invalides
+
+Fait
+	Wallets
+		depossit
+		retrait
+	refuser doublons lors des inscriptions
 
 WIP = work in progress = en cours
