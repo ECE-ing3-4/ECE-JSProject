@@ -139,11 +139,7 @@ class App extends Component {
   }
 
   handleDepositForm(obj) {
-    alert(obj.amount);
-    if (obj.amount < 0) {
-      alert("Invalid amount !");
-    }
-    else if (currentUser > 0 || acceptNotLogin) {
+    if (currentUser > 0 || acceptNotLogin) {
 
       var wallet = this.findWalletUser(currentUser);
       if (wallet != null) {

@@ -6,10 +6,11 @@ A FAIRE:
 		supprimer carte
 		modifier cards
 	blindage champs vides ou invalides
+	changer le bouton pour les retraits
 
 Fait
 	Wallets
-		depossit
+		deposit
 		retrait
 	refuser doublons lors des inscriptions
 

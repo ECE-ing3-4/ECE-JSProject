@@ -13,9 +13,11 @@ class DepositForm extends Component {
     }
 
     handleSendForm() {
-        //console.log(this.state.brand);
-        this.props.onSend(this.state);
-        this.setState({ amount: '' });
+        if (this.state.amount > 0) {
+            //console.log(this.state.brand);
+            this.props.onSend(this.state);
+            this.setState({ amount: '' });
+        }
     }
 
     render() {
