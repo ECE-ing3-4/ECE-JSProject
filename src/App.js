@@ -16,7 +16,7 @@ import deposit from './pages/Deposit.js';
 import withdrawal from './pages/Withdrawal.js';
 import transfer from './pages/Transfer.js';
 
-import {handleSendSignupForm} from './Function/handlebutton.js';
+import { handleSendSignupForm } from './Function/handlebutton.js';
 
 var listUsers = [];
 var listWallets = [];
@@ -57,7 +57,7 @@ class App extends Component {
     }
   }
 
-  
+
   handleSendSignupForm(obj) {
     //Adding user
     console.log(listUsers);
@@ -115,25 +115,34 @@ class App extends Component {
     return null;//not found
   }
 
-  handleDepositForm(obj) {
-    if (currentUser > 0 || acceptNotLogin) {
-
-      var wallet = this.findWalletUser(currentUser);
-      if (wallet != null) {
-        wallet.balance += parseInt(obj.amount);
-        if (obj.amount > 0) {
-          alert(`Succesfully deposited ${obj.amount} !`)
-        }
-        else {
-          alert(`Succesfully withdrawed ${-obj.amount} !`)
-        }
+  depoWithdraWallet(wallet, amount) {
+    if (wallet != null) {
+      if (amount > 0) {
+        wallet.balance += amount;
+        alert(`Succesfully deposited ${amount} !`);
       }
       else {
-        alert("Log in first !");
+        if (-amount <= wallet.balance) {
+          wallet.balance += amount;
+          alert(`Succesfully withdrawed ${-amount} !`);
+        }
+        else {
+          alert(`Invalid amount : not enough money !`);
+        }
       }
     }
     else {
-      alert("Log in first please !");
+      alert("Log in first !");
+    }
+  }
+
+  handleDepositForm(obj) {
+    if (currentUser > 0 || acceptNotLogin) {
+      var wallet = this.findWalletUser(currentUser);
+      this.depoWithdraWallet(wallet, parseInt(obj.amount));
+    }
+    else {
+      alert("Log in first !");
     }
   }
 
@@ -142,6 +151,57 @@ class App extends Component {
     this.handleDepositForm(obj);
   }
 
+  findRecipientWallet(destinationCardDigits) {
+    //find the card
+    var recipientCard = null;
+    var card;
+    for (var i = 0; i < listCards.length; i++) {
+      card = listCards[i];
+      if (card.last_4 == destinationCardDigits) {
+        recipientCard = card;//on devrai quitter la boucle
+      }
+    }
+    if (recipientCard == null) {//card not found
+      return -1;
+    }
+
+    /*
+    //find the owner of this card
+    var cardOwner=null;
+    var user;
+    for (var i = 0; i < listUsers.length; i++) {
+      user = listUsers[i];
+      if (user.id == recipientCard.user_id) {
+        cardOwner=user;
+      }
+    }
+    if(cardOwner==null){//error user not found (should never happen)
+      return -1;
+    }
+    */
+
+    //find the owner of this card
+    return this.findWalletUser(recipientCard.id);
+  }
+
+  handleSendTransferForm(obj) {
+    if (currentUser > 0 || acceptNotLogin) {
+      if (obj.amount > 0) {
+
+        alert(obj.amount + " : " + obj.destinationCardDigits);
+        var recipientWallet = this.findRecipientWallet(obj.destinationCardDigits);
+        var yourWallet = this.findWalletUser(currentUser);
+        this.depoWithdraWallet(recipientWallet, parseInt(obj.amount));
+        this.depoWithdraWallet(yourWallet, parseInt(obj.amount));
+      }
+      else {
+        alert("hehe, NOPE !");
+      }
+    }
+    else {
+      alert("You have to login first !");
+    }
+  }
 
   handleSend(name, text) {
     this.setState({ chat: this.state.chat.concat(`${name}: ${text}`) });
@@ -188,7 +248,7 @@ class App extends Component {
     console.log("fin liste");
   }
 
-  findObject(list, idSearched) {
+  findObjectWithId(list, idSearched) {
     var item;
     for (var i = 0; i < list.length; i++) {
       item = list[i];
@@ -308,6 +368,7 @@ class App extends Component {
     list[index].last_4 = this.lastFourDigits();
     list[index].expired_at = this.getDateExp();
     //list[index].print();
+    alert("Your new " + brand + " card expire at " + list[index].expired_at + " and the last 4 digits are " + list[index].last_4);
   }
 
   connected() {

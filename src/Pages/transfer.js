@@ -1,5 +1,6 @@
 import React from 'react';
 import { Route } from 'react-router-dom';
+import TransferForm from '../forms/TransferForm.js';
 
 export default function transfer(obj) {
   return (
@@ -8,7 +9,9 @@ export default function transfer(obj) {
         <>
           <p>Transfer page</p>
           {obj.connected() || obj.acceptNotLoginFnc() ?
-            "WIP"
+            <>
+              <TransferForm onSend={obj.handleSendTransferForm} />
+            </>
             : "Connection requise"}
         </>
       } />

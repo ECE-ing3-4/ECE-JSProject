@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 
-class DepositForm extends Component {
+class TransfertForm extends Component {
     constructor(props) {
         super(props)
-        this.state = { amount: '' };
+        this.state = { amount: '', destinationCardDigits: '' };
         this.handleSendForm = this.handleSendForm.bind(this);
         this.handleChange = this.handleChange.bind(this);
     }
@@ -14,9 +14,8 @@ class DepositForm extends Component {
 
     handleSendForm() {
         if (this.state.amount > 0) {
-            //console.log(this.state.brand);
             this.props.onSend(this.state);
-            this.setState({ amount: '' });
+            this.setState({ amount: '', destinationCardDigits: '' });
         }
     }
 
@@ -25,9 +24,11 @@ class DepositForm extends Component {
             <div>
                 Amount <input type="text" name="amount" onChange={this.handleChange} value={this.state.amount} />
                 <br />
-                <button onClick={this.handleSendForm}>Make a deposit</button>
+                Last 4 digits of the destination card <input type="text" name="destinationCardDigits" onChange={this.handleChange} value={this.state.destinationCardDigits} />
+                <br />
+                <button onClick={this.handleSendForm}>Make a transfert</button>
             </div>
         );
     }
 }
-export default DepositForm
+export default TransfertForm
