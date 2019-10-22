@@ -7,6 +7,7 @@ A FAIRE:
 		modifier cards
 	blindage champs vides ou invalides
 	changer le bouton pour les retraits
+	extraire les fonctions vers des fichiers hors du app.js
 
 Fait
 	Wallets

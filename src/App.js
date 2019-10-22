@@ -4,8 +4,9 @@ import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import links from './pages/Links.js';
 
-import Signin from './pages/SignUp.js';
+import Signup from './pages/SignUp.js';
 import login from './pages/Login.js';
+import logout from './pages/Logout.js';
 import modifyaccount from './pages/ModifyAccount.js';
 import addcard from './pages/AddCard.js';
 import modifycard from './pages/ModifyCard.js';
@@ -15,45 +16,14 @@ import deposit from './pages/Deposit.js';
 import withdrawal from './pages/Withdrawal.js';
 import transfer from './pages/Transfer.js';
 
+import {handleSendSignupForm} from './Function/handlebutton.js';
+
 var listUsers = [];
 var listWallets = [];
 var listCards = [];
 var currentUser = -1;
 var acceptNotLogin = false;//debug
 
-/*
-const user = {
-  id: -1,
-  first_name: 'string',
-  last_name: 'string',
-  email: 'email, string unique',
-  password: 'string',
-  is_admin: false,
-  print() {
-    console.log("USER : id:" + this.id + " first_name:" + this.first_name + " last_name:" + this.last_name + " email:" + this.email + " password:" + this.password + " is_admin:" + this.is_admin);
-  }
-};
-
-const card = {
-  id: -1,
-  user_id: -1,
-  last_4: 0,
-  brand: '',
-  expired_at: '',
-  print() {
-    console.log("CARD : id:" + this.id + " user_id:" + this.user_id + " last_4:" + this.last_4 + " brand:" + this.brand + " expired_at:" + this.expired_at);
-  }
-};
-
-const wallet = {
-  id: -1,
-  user_id: -1,
-  balance: 0,
-  print() {
-    console.log("WALLET : id:" + this.id + " user_id:" + this.user_id + " balance:" + this.balance);
-  }
-};
-*/
 class App extends Component {
   constructor(props) {
     super(props);
@@ -80,6 +50,14 @@ class App extends Component {
     }
   }
 
+  handleSendLogoutForm() {
+    if (currentUser > 0) {
+      currentUser = -1;
+      alert("Bye Bye");
+    }
+  }
+
+  
   handleSendSignupForm(obj) {
     //Adding user
     console.log(listUsers);
@@ -94,11 +72,10 @@ class App extends Component {
     }
   }
 
-
   handleSendAddCardForm(obj) {
     if (currentUser > 0 || acceptNotLogin) {
       this.addCard(listCards, currentUser, obj.brand);
-      //this.printList(listCards);
+      console.log(listCards);
     }
     else {
       alert("You have to login first !");
@@ -352,9 +329,10 @@ class App extends Component {
     return (
       <BrowserRouter>
         <div>
-          {links()}
-          {Signin(this)}
+          {links(this)}
+          {Signup(this)}
           {login(this)}
+          {logout(this)}
           {modifyaccount(this)}
           {addcard(this)}
           {modifycard(this)}
