@@ -38,6 +38,7 @@ class App extends Component {
     this.handleDeleteCardForm = this.handleDeleteCardForm.bind(this);
     this.handleDepositForm = this.handleDepositForm.bind(this);
     this.handleWithdrawalForm = this.handleWithdrawalForm.bind(this);
+    this.handleSendTransferForm = this.handleSendTransferForm.bind(this);
   }
 
   /** BUTTON HANDLE */
@@ -184,6 +185,7 @@ class App extends Component {
     if (currentUser > 0 || acceptNotLogin) {
       var wallet = this.findWalletUser(currentUser);
       this.depoWithdraWallet(wallet, parseInt(obj.amount));
+      console.log(listWallets);
     }
     else {
       alert("Log in first !");
@@ -192,7 +194,8 @@ class App extends Component {
 
   handleWithdrawalForm(obj) {
     obj.amount = - obj.amount;
-    this.handleDepositForm(obj);
+    this.handleDepositForm(obj);    
+    console.log(listWallets);
   }
 
   findRecipientWallet(destinationCardDigits) {
@@ -205,7 +208,7 @@ class App extends Component {
 
   handleSendTransferForm(obj) {
     if (currentUser > 0 || acceptNotLogin) {
-      if (obj.amount > 0) {
+      if (obj.amount > -1) {
 
         alert(obj.amount + " : " + obj.destinationCardDigits);
         var yourWallet = this.findWalletUser(currentUser);
