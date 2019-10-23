@@ -68,7 +68,6 @@ class App extends Component {
 
   handleSendSignupForm(obj) {
     //Adding user
-    console.log(listUsers);
     var indexNewUser = this.addUser(listUsers, obj.first_name, obj.last_name, obj.email, obj.password, false);
     if (indexNewUser >= 0) {//user addded succefully
       var newId = listUsers[indexNewUser].id;
@@ -77,6 +76,8 @@ class App extends Component {
       listWallets[indexNewWallet].user_id = newId;
       //alert(`Account created : ${obj.first_name}`);
       this.handleSendLoginForm(obj)//autologin
+      console.log(listUsers);
+      console.log(listWallets);
     }
   }
 
@@ -210,11 +211,11 @@ class App extends Component {
     if (currentUser > 0 || acceptNotLogin) {
       if (obj.amount > -1) {
 
-        alert(obj.amount + " : " + obj.destinationCardDigits);
+        //alert(obj.amount + " : " + obj.destinationCardDigits);
         var yourWallet = this.findWalletUser(currentUser);
         var recipientWallet = this.findRecipientWallet(obj.destinationCardDigits);
         this.depoWithdraWallet(recipientWallet, parseInt(obj.amount));
-        this.depoWithdraWallet(yourWallet, parseInt(obj.amount));
+        this.depoWithdraWallet(yourWallet, -parseInt(obj.amount));
       }
       else {
         alert("hehe, NOPE !");

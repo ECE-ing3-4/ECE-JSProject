@@ -1,9 +1,8 @@
 A FAIRE OBLIGATOIRE:
 	Modify account
-	Wallets
-		corriger probleme Transfert
 
 A FAIRE EN OPTION:
+	changer les messages lors des transferts
 	vider les champs après appui sur un bouton
 	blindage champs vides ou invalides
 	extraire les fonctions vers des fichiers hors du app.js
@@ -18,6 +17,7 @@ Fait
 	Wallets
 		deposit
 		retrait
+		corriger probleme Transfert
 	refuser doublons lors des inscriptions
 	changer le bouton pour les retraits
 
