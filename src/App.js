@@ -189,8 +189,8 @@ class App extends Component {
       if (obj.amount > 0) {
 
         alert(obj.amount + " : " + obj.destinationCardDigits);
-        var recipientWallet = this.findRecipientWallet(obj.destinationCardDigits);
         var yourWallet = this.findWalletUser(currentUser);
+        var recipientWallet = this.findRecipientWallet(obj.destinationCardDigits);
         this.depoWithdraWallet(recipientWallet, parseInt(obj.amount));
         this.depoWithdraWallet(yourWallet, parseInt(obj.amount));
       }

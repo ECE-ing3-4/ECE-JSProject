@@ -1,7 +1,7 @@
 A FAIRE OBLIGATOIRE:
 	Modify account
 	Wallets
-		Transfert
+		corriger probleme Transfert
 	Cards 
 		supprimer carte
 		modifier cards
