@@ -2,19 +2,20 @@ A FAIRE OBLIGATOIRE:
 	Modify account
 	Wallets
 		corriger probleme Transfert
-	Cards 
-		supprimer carte
+	Cards
 		modifier cards
 	changer le bouton pour les retraits
 
 A FAIRE EN OPTION:
 	blindage champs vides ou invalides
 	extraire les fonctions vers des fichiers hors du app.js
-	cacher les liens quand il ne sont pas utilisable (genre cacher depot si on est pas login)
+	cacher les liens quand il ne sont pas utilisable (genre cacher depot si on ne s'est pas login)
 	remplacer tout les fichiers form par un seul form "multifonction"
 
 
 Fait
+	Cards 
+		supprimer carte
 	Wallets
 		deposit
 		retrait

@@ -85,23 +85,24 @@ class App extends Component {
   handleDeleteCardForm(obj) {
     if (currentUser > 0 || acceptNotLogin) {
       let deletedWell = false;
-      //console.log(listCards[0].last_4);
-      //console.log(listCards[1].last_4);
       for (var i = 0; i < listCards.length; i++) {
-        //console.log(listCards[i].last_4);
         if (currentUser == listCards[i].user_id && listCards[i].last_4 == obj.last_4) {
-          alert("programmer pour supp la carte");
-          deletedWell = true;
+          if (listCards[i].id != -1) {
+            //listCards.slice(i, 1);
+            listCards[i].id = -1;
+            alert("Card deleted !");
+            deletedWell = true;
+          }
         }
       }
       if (!deletedWell) {
-        alert("Card not found");
-      }
-
-      else {
-        alert("Log in first please !");
+        alert("Card not found !");
       }
     }
+    else {
+      alert("Log in first please !");
+    }
+
   }
 
   findWalletUser(idUser) {
@@ -157,7 +158,7 @@ class App extends Component {
     var card;
     for (var i = 0; i < listCards.length; i++) {
       card = listCards[i];
-      if (card.last_4 == destinationCardDigits) {
+      if (card.last_4 == destinationCardDigits && listCards[i].id != -1) {
         recipientCard = card;//on devrai quitter la boucle
       }
     }
