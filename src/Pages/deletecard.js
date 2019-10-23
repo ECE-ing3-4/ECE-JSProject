@@ -1,6 +1,6 @@
 import React from 'react';
 import { Route } from 'react-router-dom';
-import DeleteCardForm from '../forms/DeleteCardForm.js';
+import Form from '../forms/Form.js';
 
 export default function deletecard(obj) {
   return (
@@ -9,7 +9,7 @@ export default function deletecard(obj) {
         <>
           <p>Delete a card page</p>
           {obj.connected() || obj.acceptNotLoginFnc() ?
-            <DeleteCardForm onSend={obj.handleDeleteCardForm} />
+            <Form inputNames={["last_4"]} inputTexts={["Last 4 digits"]} buttonText={"Delete the card"} onSend={obj.handleDeleteCardForm} />
             : "Connection requise"}
         </>
       } />

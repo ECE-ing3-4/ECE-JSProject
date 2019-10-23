@@ -1,6 +1,6 @@
 import React from 'react';
 import { Route } from 'react-router-dom';
-import LoginForm from '../forms/LoginForm.js';
+import Form from '../forms/Form.js';
 
 export default function login(obj) {
     return (
@@ -8,7 +8,7 @@ export default function login(obj) {
             <Route exact path="/login" component={() =>
                 <>
                     Log in page
-                    <LoginForm onSend={obj.handleSendLoginForm} />
+                    <Form inputNames={["email","password"]} inputTexts={["Email","Password"]} buttonText={"Log in"} onSend={obj.handleSendLoginForm} />
                 </>
             } />
         </div>

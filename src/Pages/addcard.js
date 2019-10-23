@@ -1,6 +1,6 @@
 import React from 'react';
 import { Route } from 'react-router-dom';
-import AddCardForm from '../forms/AddCardForm.js';
+import Form from '../forms/Form.js';
 
 export default function addcard(obj) {
   return (
@@ -9,7 +9,7 @@ export default function addcard(obj) {
         <>
           <p>Add a card page</p>
           {obj.connected() || obj.acceptNotLoginFnc() ?
-            <AddCardForm onSend={obj.handleSendAddCardForm} />
+            <Form inputNames={["brand"]} inputTexts={["Brand"]} buttonText={"Add the card"} onSend={obj.handleSendAddCardForm} />
             : "Connection requise"}
         </>
       } />

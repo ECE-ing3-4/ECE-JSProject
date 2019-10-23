@@ -1,6 +1,6 @@
 import React from 'react';
 import { Route } from 'react-router-dom';
-import TransferForm from '../forms/TransferForm.js';
+import Form from '../forms/Form.js';
 
 export default function transfer(obj) {
   return (
@@ -9,9 +9,7 @@ export default function transfer(obj) {
         <>
           <p>Transfer page</p>
           {obj.connected() || obj.acceptNotLoginFnc() ?
-            <>
-              <TransferForm onSend={obj.handleSendTransferForm} />
-            </>
+            <Form inputNames={["amount","destinationCardDigits"]} inputTexts={["Amount","Last 4 digits of the destination card"]} buttonText={"Make the transfer"} onSend={obj.handleSendTransferForm} />
             : "Connection requise"}
         </>
       } />

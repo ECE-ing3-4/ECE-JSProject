@@ -1,6 +1,6 @@
 import React from 'react';
 import { Route } from 'react-router-dom';
-import SignUpForm from '../forms/SignUpForm.js';
+import Form from '../forms/Form.js';
 
 export default function signup(obj) {
     return (
@@ -8,7 +8,7 @@ export default function signup(obj) {
             <Route exact path="/signup" component={() =>
                 <>
                     Sign up page
-                    <SignUpForm onSend={obj.handleSendSignupForm} />
+                    <Form inputNames={["first_name", "last_name", "email", "password"]} inputTexts={["First name", "Last Name", "Email", "Password"]} buttonText={"Sign up"} onSend={obj.handleSendSignupForm} />
                 </>
             } />
         </div>

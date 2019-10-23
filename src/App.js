@@ -57,6 +57,9 @@ class App extends Component {
     }
   }
 
+  handleTestForm(obj) {
+    console.log(obj);
+  }
 
   handleSendSignupForm(obj) {
     //Adding user

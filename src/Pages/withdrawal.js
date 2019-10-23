@@ -1,6 +1,6 @@
 import React from 'react';
 import { Route } from 'react-router-dom';
-import DepositForm from '../forms/DepositForm.js';
+import Form from '../forms/Form.js';
 
 export default function withdrawal(obj) {
   return (
@@ -9,7 +9,7 @@ export default function withdrawal(obj) {
         <>
           <p>Withdrawal in page</p>
           {obj.connected() || obj.acceptNotLoginFnc() ?
-            <DepositForm onSend={obj.handleWithdrawalForm} />
+            <Form inputNames={["amount"]} inputTexts={["Amount"]} buttonText={"Make a withdrawal"} onSend={obj.handleWithdrawalForm} />
             : "Connection requise"}
         </>
       } />

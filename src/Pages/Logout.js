@@ -1,6 +1,6 @@
 import React from 'react';
 import { Route } from 'react-router-dom';
-import LogoutForm from '../forms/LogoutForm.js';
+import Form from '../forms/Form.js';
 
 export default function logout(obj) {
     return (
@@ -8,7 +8,7 @@ export default function logout(obj) {
             <Route exact path="/logout" component={() =>
                 <>
                     Log out page
-                    <LogoutForm onSend={obj.handleSendLogoutForm} />
+                    <Form buttonText={"Log out"} onSend={obj.handleSendLogoutForm} />
                 </>
             } />
         </div>
