@@ -30,8 +30,12 @@ class App extends Component {
     this.state = { chat: [] };;
     //this.handleSend = this.handleSend.bind(this);
     this.handleSendLoginForm = this.handleSendLoginForm.bind(this);
+    this.handleSendLogoutForm = this.handleSendLogoutForm.bind(this);
+    this.handlePrintForm = this.handlePrintForm.bind(this);
     this.handleSendSignupForm = this.handleSendSignupForm.bind(this);
+    this.handleBrandChangeForm = this.handleBrandChangeForm.bind(this);
     this.handleSendAddCardForm = this.handleSendAddCardForm.bind(this);
+    this.handleDeleteCardForm = this.handleDeleteCardForm.bind(this);
     this.handleDepositForm = this.handleDepositForm.bind(this);
     this.handleWithdrawalForm = this.handleWithdrawalForm.bind(this);
   }
@@ -57,7 +61,7 @@ class App extends Component {
     }
   }
 
-  handleTestForm(obj) {
+  handlePrintForm(obj) {
     console.log(obj);
   }
 
@@ -72,6 +76,41 @@ class App extends Component {
       listWallets[indexNewWallet].user_id = newId;
       //alert(`Account created : ${obj.first_name}`);
       this.handleSendLoginForm(obj)//autologin
+    }
+  }
+
+
+  findCard(destinationCardDigits) {
+    //find the card
+    var card;
+    for (var i = 0; i < listCards.length; i++) {
+      card = listCards[i];
+      if (card.last_4 == destinationCardDigits && listCards[i].id != -1) {
+        return card;
+      }
+    }
+    return -1; //card not found
+  }
+
+  handleBrandChangeForm(obj) {
+    if (currentUser > 0 || acceptNotLogin) {
+      var card = this.findCard(obj.last_4);
+      if (card != -1) {
+        if (card.user_id == currentUser) {
+          alert("Your " + card.brand + " card is now a " + obj.newBrand + " card");
+          card.brand = obj.newBrand;
+          console.log(listCards);
+        }
+        else{
+          alert("This card is not yours !");
+        }
+      }
+      else {
+        alert('Card not found !');
+      }
+    }
+    else {
+      alert("You have to login first !");
     }
   }
 
@@ -95,6 +134,7 @@ class App extends Component {
             listCards[i].id = -1;
             alert("Card deleted !");
             deletedWell = true;
+            console.log(listCards);
           }
         }
       }
@@ -157,32 +197,7 @@ class App extends Component {
 
   findRecipientWallet(destinationCardDigits) {
     //find the card
-    var recipientCard = null;
-    var card;
-    for (var i = 0; i < listCards.length; i++) {
-      card = listCards[i];
-      if (card.last_4 == destinationCardDigits && listCards[i].id != -1) {
-        recipientCard = card;//on devrai quitter la boucle
-      }
-    }
-    if (recipientCard == null) {//card not found
-      return -1;
-    }
-
-    /*
-    //find the owner of this card
-    var cardOwner=null;
-    var user;
-    for (var i = 0; i < listUsers.length; i++) {
-      user = listUsers[i];
-      if (user.id == recipientCard.user_id) {
-        cardOwner=user;
-      }
-    }
-    if(cardOwner==null){//error user not found (should never happen)
-      return -1;
-    }
-    */
+    var recipientCard = this.findCard(destinationCardDigits);
 
     //find the owner of this card
     return this.findWalletUser(recipientCard.id);

@@ -1,5 +1,6 @@
 import React from 'react';
 import { Route } from 'react-router-dom';
+import Form from '../forms/Form.js';
 
 export default function modifycard(obj) {
     return (
@@ -8,7 +9,7 @@ export default function modifycard(obj) {
                 <>
                     <p>Modify card</p>
                     {obj.connected() || obj.acceptNotLoginFnc() ?
-                        "WIP"
+                        <Form inputNames={["last_4", "newBrand"]} inputTexts={["Last 4 digits of the card", "New brand"]} buttonText={"Change the brand"} onSend={obj.handleBrandChangeForm} />
                         : "Connection requise"}
                 </>
             } />

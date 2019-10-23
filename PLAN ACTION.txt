@@ -2,11 +2,9 @@ A FAIRE OBLIGATOIRE:
 	Modify account
 	Wallets
 		corriger probleme Transfert
-	Cards
-		modifier cards
-	changer le bouton pour les retraits
 
 A FAIRE EN OPTION:
+	vider les champs après appui sur un bouton
 	blindage champs vides ou invalides
 	extraire les fonctions vers des fichiers hors du app.js
 	cacher les liens quand il ne sont pas utilisable (genre cacher depot si on ne s'est pas login)
@@ -16,9 +14,11 @@ A FAIRE EN OPTION:
 Fait
 	Cards 
 		supprimer carte
+		modifier cards
 	Wallets
 		deposit
 		retrait
 	refuser doublons lors des inscriptions
+	changer le bouton pour les retraits
 
 WIP = work in progress = en cours
