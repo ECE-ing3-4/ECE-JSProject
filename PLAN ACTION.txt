@@ -1,13 +1,12 @@
 A FAIRE OBLIGATOIRE:
-	
+	tester tout
 
 A FAIRE EN OPTION:
-	changer les messages lors des transferts
-	vider les champs après appui sur un bouton
-	blindage champs vides ou invalides
 	extraire les fonctions vers des fichiers hors du app.js
+	blindage champs vides ou invalides
+	vider les champs après appui sur un bouton
 	cacher les liens quand il ne sont pas utilisable (genre cacher depot si on ne s'est pas login)
-	remplacer tout les fichiers form par un seul form "multifonction"
+	changer les messages lors des transferts (et encore c'est bien comme ca)
 
 
 Fait
@@ -21,5 +20,6 @@ Fait
 		corriger probleme Transfert
 	refuser doublons lors des inscriptions
 	changer le bouton pour les retraits
+	remplacer tout les fichiers form par un seul form "multifonction"
 
 WIP = work in progress = en cours

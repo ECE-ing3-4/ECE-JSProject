@@ -16,13 +16,12 @@ import deposit from './pages/Deposit.js';
 import withdrawal from './pages/Withdrawal.js';
 import transfer from './pages/Transfer.js';
 
-import { handleSendSignupForm } from './Function/handlebutton.js';
-
 var listUsers = [];
 var listWallets = [];
 var listCards = [];
 var currentUser = -1;
 var acceptNotLogin = false;//debug
+var acceptEmptyFields = false;//debug
 
 class App extends Component {
   constructor(props) {
@@ -40,7 +39,6 @@ class App extends Component {
     this.handleWithdrawalForm = this.handleWithdrawalForm.bind(this);
     this.handleSendTransferForm = this.handleSendTransferForm.bind(this);
     this.handleChangePasswordForm = this.handleChangePasswordForm.bind(this);
-    
   }
 
   /** BUTTON HANDLE */
