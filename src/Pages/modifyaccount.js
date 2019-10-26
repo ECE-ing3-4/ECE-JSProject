@@ -8,9 +8,8 @@ export default function modifyaccount(obj) {
       <Route exact path="/modifyaccount" component={() =>
         <>
           <p>Modify your account page</p>
-          <Form inputNames={["prenom","nom","last_4"]} inputTexts={["Prénom","Nom","4 derniers"]} buttonText={"send"} onSend={obj.handleTestForm} />
           {obj.connected() || obj.acceptNotLoginFnc() ?
-            "WIP"
+            <Form inputNames={["oldPassword", "newPassword", "newPasswordConfirmation"]} inputTexts={["Old password", "New password", "New password again"]} buttonText={"Change password"} onSend={obj.handleChangePasswordForm} />
             : "Connection requise"}
         </>
       } />

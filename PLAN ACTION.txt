@@ -1,5 +1,5 @@
 A FAIRE OBLIGATOIRE:
-	Modify account
+	
 
 A FAIRE EN OPTION:
 	changer les messages lors des transferts
@@ -11,6 +11,7 @@ A FAIRE EN OPTION:
 
 
 Fait
+	Modify account
 	Cards 
 		supprimer carte
 		modifier cards

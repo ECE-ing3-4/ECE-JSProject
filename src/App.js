@@ -39,6 +39,8 @@ class App extends Component {
     this.handleDepositForm = this.handleDepositForm.bind(this);
     this.handleWithdrawalForm = this.handleWithdrawalForm.bind(this);
     this.handleSendTransferForm = this.handleSendTransferForm.bind(this);
+    this.handleChangePasswordForm = this.handleChangePasswordForm.bind(this);
+    
   }
 
   /** BUTTON HANDLE */
@@ -103,7 +105,7 @@ class App extends Component {
           card.brand = obj.newBrand;
           console.log(listCards);
         }
-        else{
+        else {
           alert("This card is not yours !");
         }
       }
@@ -161,6 +163,17 @@ class App extends Component {
     return null;//not found
   }
 
+  findUser(idUser) {
+    var usr;
+    for (var i = 0; i < listUsers.length; i++) {
+      usr = listUsers[i];
+      if (usr.id == idUser) {
+        return (usr);
+      }
+    }
+    return null;//not found
+  }
+
   depoWithdraWallet(wallet, amount) {
     if (wallet != null) {
       if (amount > 0) {
@@ -195,7 +208,7 @@ class App extends Component {
 
   handleWithdrawalForm(obj) {
     obj.amount = - obj.amount;
-    this.handleDepositForm(obj);    
+    this.handleDepositForm(obj);
     console.log(listWallets);
   }
 
@@ -207,6 +220,28 @@ class App extends Component {
     return this.findWalletUser(recipientCard.id);
   }
 
+  handleChangePasswordForm(obj) {
+    if (currentUser > 0 || acceptNotLogin) {
+      var usr = this.findUser(currentUser);
+      if (usr.password == obj.oldPassword) {
+        if (obj.newPassword == obj.newPasswordConfirmation) {
+          usr.password=obj.newPassword;
+          alert("Password changed succcesfully !");
+          console.log(listUsers);
+        }
+        else{
+          alert("New passwords doesn't match !");
+        }
+      }
+      else {
+        alert("Wrong old password !");
+      }
+    }
+    else {
+      alert("You have to login first !");
+    }
+  }
+
   handleSendTransferForm(obj) {
     if (currentUser > 0 || acceptNotLogin) {
       if (obj.amount > -1) {
@@ -216,6 +251,7 @@ class App extends Component {
         var recipientWallet = this.findRecipientWallet(obj.destinationCardDigits);
         this.depoWithdraWallet(recipientWallet, parseInt(obj.amount));
         this.depoWithdraWallet(yourWallet, -parseInt(obj.amount));
+        console.log(listWallets);
       }
       else {
         alert("hehe, NOPE !");
