@@ -453,7 +453,7 @@ class App extends Component {
           {logout(this)}
           {modifyaccount(this)}
           {addcard(this)}
-          {modifycard(this)}
+          {modifycard(this,listCards)}
           {deletecard(this)}
           {balance(this)}
           {deposit(this)}
