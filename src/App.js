@@ -41,6 +41,10 @@ class App extends Component {
     this.handleChangePasswordForm = this.handleChangePasswordForm.bind(this);
   }
 
+  getCurrentID(){
+    return currentUser;
+  }
+
   /** BUTTON HANDLE */
   handleSendLoginForm(obj) {
     //console.log(`email : ${obj.email}, password: ${obj.password}`);
@@ -453,7 +457,7 @@ class App extends Component {
           {logout(this)}
           {modifyaccount(this)}
           {addcard(this)}
-          {modifycard(this,listCards,currentUser)}
+          {modifycard(this,listCards)}
           {deletecard(this)}
           {balance(this)}
           {deposit(this)}

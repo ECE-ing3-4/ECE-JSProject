@@ -58,7 +58,8 @@ function printfcard(obj) {
 */
 function printfcard(listCards, usrID) {
     let str = listCards.map((card) => {
-        if (card.usrID == usrID) {
+        alert(card.user_id + " vs "+ usrID);
+        if (card.user_id == usrID) {
             return (
                 <p>
                     Your {card.brand} card (XXXX-XXXX-XXXX-{card.last_4}) expire at {card.expired_at}.
@@ -75,7 +76,7 @@ export default function modifycard(obj, listCards, usrID) {
             <Route exact path="/modifycard" component={() =>
                 <>
                     <p>Modify card</p>
-                    {printfcard(listCards, usrID)}
+                    {printfcard(listCards, obj.getCurrentID())}
                     {obj.connected() || obj.acceptNotLoginFnc() ?
                         <Form inputNames={["last_4", "newBrand"]} inputTexts={["Last 4 digits of the card", "New brand"]} buttonText={"Change the brand"} onSend={obj.handleBrandChangeForm} />
                         : "Connection requise"}
