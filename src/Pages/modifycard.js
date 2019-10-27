@@ -1,13 +1,15 @@
 import React from 'react';
 import { Route } from 'react-router-dom';
 import Form from '../forms/Form.js';
+import { tsPropertySignature } from '@babel/types';
 
-export default function modifycard(obj) {
+/*export default function modifycard(obj) {
     return (
         <div>
             <Route exact path="/modifycard" component={() =>
                 <>
                     <p>Modify card</p>
+                    <p>You have {obj.listCards.length} cards:</p>
                     {obj.connected() || obj.acceptNotLoginFnc() ?
                         <Form inputNames={["last_4", "newBrand"]} inputTexts={["Last 4 digits of the card", "New brand"]} buttonText={"Change the brand"} onSend={obj.handleBrandChangeForm} />
                         : "Connection requise"}
@@ -42,4 +44,30 @@ export default function modifycard(obj) {
         </div>
     )
     */
+   printfcard(obj) {
+       for (let i = 0 ; i < obj.listCards.length ; i++) {
+           <p>{obj.listCards[i].last_4}    {obj.listCards[i].brand}     {obj.listCards[i].expired_at}</p>
+       }
+    
+    }
+
+   export default function modifycard(obj) {
+    return (
+        <div>
+            <Route exact path="/modifycard" component={() =>
+                <>
+                    <p>Modify card</p>
+                    <p>You have {obj.listCards.length} cards:</p>
+                    {printfcard(obj)};
+                    {obj.connected() || obj.acceptNotLoginFnc() ?
+                        <Form inputNames={["last_4", "newBrand"]} inputTexts={["Last 4 digits of the card", "New brand"]} buttonText={"Change the brand"} onSend={obj.handleBrandChangeForm} />
+                        : "Connection requise"}
+                </>
+            } />
+        </div>
+    )
+
+
+
+
 }
