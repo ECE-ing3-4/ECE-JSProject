@@ -1,6 +1,6 @@
 import React from 'react';
 import { Route } from 'react-router-dom';
-import Form from '../forms/Form.js';
+import Form from '../Forms/Form.js';
 
 export default function deposit(obj) {
   return (

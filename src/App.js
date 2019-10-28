@@ -137,6 +137,7 @@ class App extends Component {
           if (listCards[i].id != -1) {
             //listCards.slice(i, 1);
             listCards[i].id = -1;
+            listCards[i].user_id = -1;
             alert("Card deleted !");
             deletedWell = true;
             console.log(listCards);
@@ -457,7 +458,7 @@ class App extends Component {
           {modifyaccount(this)}
           {addcard(this)}
           {modifycard(this, listCards)}
-          {deletecard(this)}
+          {deletecard(this, listCards)}
           {balance(this)}
           {deposit(this)}
           {withdrawal(this)}

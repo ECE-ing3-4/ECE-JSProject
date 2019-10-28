@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { start } from 'repl';
 
 class AddCardForm extends Component {
     constructor(props) {
@@ -16,7 +17,10 @@ class AddCardForm extends Component {
 
     handleSendForm() {
         this.props.onSend(this.state);
-        this.setState({ inputs: '' });
+        if (this.state == '')
+            alert('Wrong input');
+        else
+            this.setState({ inputs: '' });
     }
 
     displayInputs() {
