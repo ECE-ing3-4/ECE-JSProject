@@ -448,6 +448,13 @@ class App extends Component {
     return Math.floor(Math.random() * Math.floor(max));
   }
 
+  getNames() {
+    var a= localStorage.getItem('currentUserID');
+    var b= this.findUserIndex(a);
+    var c= JSON.localStorage.getItem('listUsers');
+    return (c[b].first_name + " " + c[b].last_name);
+  }
+
   getDateExp() {
     var ladate = new Date()
     const current_date = { mm: -1, yyyy: -1 };
@@ -515,8 +522,18 @@ class App extends Component {
       <BrowserRouter>
         <div>
           {links(this)}
-
         </div>
+
+
+        <div class="col-2 offset-md-2">
+          <form class="col-13 justify-content-right align-items-center">
+            <span class="border-dark">
+              <p class="p-7 mb-50 bg-info text-white">Your are connected as {this.getNames()} </p>
+            </span>
+            <br />
+          </form>
+        </div>
+
         <div class="col-2 offset-md-8">
           <form class="col-13 justify-content-right align-items-center">
             <span class="border-dark">
@@ -525,12 +542,16 @@ class App extends Component {
             <br />
           </form>
         </div>
+
+
         <br />
         <br />
         <br />
         <br />
         <br />
         <br />
+
+
         <div class="container h-100">
           <div class="row h-100 justify-content-center align-items-center">
             <form class="col-25">
