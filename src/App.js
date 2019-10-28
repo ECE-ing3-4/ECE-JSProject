@@ -41,14 +41,17 @@ class App extends Component {
     this.handleChangePasswordForm = this.handleChangePasswordForm.bind(this);
   }
 
+  getCurrentID() {
+    return currentUser;
+  }
+
   /** BUTTON HANDLE */
   handleSendLoginForm(obj) {
-    //console.log(`email : ${obj.email}, password: ${obj.password}`);
     var id = this.validUser(obj.email, obj.password);
     if (id >= 0) {//if valid
       currentUser = id;
       var index = this.findIndexObject(listUsers, id);
-      alert("Welcome " + listUsers[index].first_name);
+      alert("Welcome " + listUsers[index].first_name + " !");
     }
     else {
       alert("Invalid credentials !");
@@ -223,11 +226,11 @@ class App extends Component {
       var usr = this.findUser(currentUser);
       if (usr.password == obj.oldPassword) {
         if (obj.newPassword == obj.newPasswordConfirmation) {
-          usr.password=obj.newPassword;
+          usr.password = obj.newPassword;
           alert("Password changed succcesfully !");
           console.log(listUsers);
         }
-        else{
+        else {
           alert("New passwords doesn't match !");
         }
       }
@@ -453,7 +456,7 @@ class App extends Component {
           {logout(this)}
           {modifyaccount(this)}
           {addcard(this)}
-          {modifycard(this,listCards,currentUser)}
+          {modifycard(this, listCards)}
           {deletecard(this)}
           {balance(this)}
           {deposit(this)}
