@@ -17,10 +17,11 @@ import withdrawal from './Pages/Withdrawal.js';
 import transfer from './Pages/Transfer.js';
 
 
-var ls = require('local-storage');
+//var ls = require('local-storage');
+import ls from 'local-storage';
 ls.set('currentUserID', -1);
 
-alert(ls.get('currentUserID'));
+//alert(ls.get('currentUserID'));
 
 var listUsers = [];
 var listWallets = [];
@@ -53,9 +54,11 @@ class App extends Component {
 
   /** BUTTON HANDLE */
   handleSendLoginForm(obj) {//
+    alert(ls.get('currentUserID'));
     var id = this.validUser(obj.email, obj.password);
     if (id >= 0) {//if valid
       currentUser = id;
+      ls.set('currentUserID', id);
       var index = this.findIndexObject(listUsers, id);
       alert("Welcome " + listUsers[index].first_name + " !");
     }
@@ -67,6 +70,7 @@ class App extends Component {
   handleSendLogoutForm() {
     if (currentUser > 0) {
       currentUser = -1;
+      ls.set('currentUserID', -1);
       alert("Bye Bye");
     }
   }
@@ -139,7 +143,8 @@ class App extends Component {
     if (currentUser > 0 || acceptNotLogin) {
       let deletedWell = false;
       for (var i = 0; i < listCards.length; i++) {
-        if (currentUser == listCards[i].user_id && listCards[i].last_4 == obj.last_4) {
+        if (ls.get('currentUserID') == listCards[i].user_id && listCards[i].last_4 == obj.last_4) {
+          //if (currentUser == listCards[i].user_id && listCards[i].last_4 == obj.last_4) {
           if (listCards[i].id != -1) {
             //listCards.slice(i, 1);
             listCards[i].id = -1;
@@ -439,7 +444,9 @@ class App extends Component {
   }
 
   connected() {
-    return (currentUser > 0);
+    alert(ls.get('currentUserID'));
+    return (ls.get('currentUserID') > 0);
+    //return (currentUser > 0);
   }
 
   acceptNotLoginFnc() {

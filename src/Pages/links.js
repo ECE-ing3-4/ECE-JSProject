@@ -11,7 +11,8 @@ import {
   UncontrolledDropdown,
   DropdownToggle,
   DropdownMenu,
-  DropdownItem } from 'reactstrap';
+  DropdownItem
+} from 'reactstrap';
 
 export default function links(obj) {
   return (
@@ -23,6 +24,7 @@ export default function links(obj) {
 
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav mr-auto">
+            <li><Link to="/deposit">Deposit</Link></li>
             <li class="nav-item"><a class="nav-link" href="/signup">Sign up</a></li>
             <li class="nav-item"><a class="nav-link" href="/login">Log in</a></li>
             <li class="nav-item"><a class="nav-link" href="/logout">Log out</a></li>
@@ -30,32 +32,22 @@ export default function links(obj) {
 
             <UncontrolledDropdown nav inNavbar>
               <DropdownToggle nav caret>
-                Options
+                Card
               </DropdownToggle>
               <DropdownMenu right>
                 <DropdownItem>
-                  Option 1
+                  <a class="dropdown-item" href="/addcard">Add a card</a>
                 </DropdownItem>
                 <DropdownItem>
-                  Option 2
+                  <a class="dropdown-item" href="/modifycard">Modify a card</a>
                 </DropdownItem>
                 <DropdownItem divider />
                 <DropdownItem>
-                  Reset
+                  <a class="dropdown-item" href="/deletecard">Delete a card</a>
                 </DropdownItem>
               </DropdownMenu>
             </UncontrolledDropdown>
 
-            <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                Card
-            </a>
-              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                <a class="dropdown-item" href="/addcard">Add a card</a>
-                <a class="dropdown-item" href="/modifycard">Modify a card</a>
-                <a class="dropdown-item" href="/deletecard">Delete a card</a>
-              </div>
-            </li>
 
             <li class="nav-item"><a class="nav-link" href="/balance">Balance</a></li>
             <li class="nav-item"><a class="nav-link" href="/deposit">Deposit</a></li>
