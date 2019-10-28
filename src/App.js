@@ -516,14 +516,22 @@ class App extends Component {
       <BrowserRouter>
         <div>
           {links(this)}
-          <br />
-          <br />
-          <br />
-          <br />
-          <br />
-          <br />
 
         </div>
+        <div class="col-2 offset-md-8">
+          <form class="col-13 justify-content-right align-items-center">
+            <span class="border-dark">
+              <p class="p-7 mb-50 bg-info text-white">Your current balance is {this.getCurrentBalance()} usd</p>
+            </span>
+            <br />
+          </form>
+        </div>
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
         <div class="container h-100">
           <div class="row h-100 justify-content-center align-items-center">
             <form class="col-25">
@@ -542,11 +550,6 @@ class App extends Component {
               </div>
             </form>
           </div>
-        </div>
-        <div>
-          <span class="border-danger">
-            <p class="p-7 mb-50 bg-info text-white">Your current balance is {this.getCurrentBalance()} usd</p>
-          </span>
         </div>
 
       </BrowserRouter>
