@@ -527,6 +527,11 @@ class App extends Component {
           </form>
           </div>
           </div>
+          <div>
+          <span class="border-danger">
+            <p class="p-7 mb-50 bg-info text-white">Your current balance is {this.getCurrentBalance()} usd</p>
+            </span>
+            </div>
         
       </BrowserRouter>
     );
