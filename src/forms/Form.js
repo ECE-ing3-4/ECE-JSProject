@@ -25,9 +25,16 @@ class AddCardForm extends Component {
     displayInputs() {
         if (typeof this.props.inputNames != 'undefined') {
             let inputs = this.props.inputNames.map((name, i) => {
-                return (<>
-                    <p>{this.props.inputTexts[i]} <input type="text" name={name} onChange={this.handleChange} value={this.state.inputs[name]} /></p>
-                </>);
+                if (name == "password") {
+                    return (<>
+                        <p>{this.props.inputTexts[i]} <input type="password" name={name} onChange={this.handleChange} value={this.state.inputs[name]} /></p>
+                    </>);
+                }
+                else {
+                    return (<>
+                        <p>{this.props.inputTexts[i]} <input type="text" name={name} onChange={this.handleChange} value={this.state.inputs[name]} /></p>
+                    </>);
+                }
             });
             return (inputs);
         }
@@ -40,7 +47,7 @@ class AddCardForm extends Component {
         return (
             <div>
                 {this.displayInputs()}
-                <button type ="reset" onClick={this.handleSendForm}>{this.props.buttonText}</button>
+                <button type="reset" onClick={this.handleSendForm}>{this.props.buttonText}</button>
             </div>
         );
     }

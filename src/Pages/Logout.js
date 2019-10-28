@@ -7,8 +7,10 @@ export default function logout(obj) {
         <div>
             <Route exact path="/logout" component={() =>
                 <>
-                    Log out page
-                    <Form buttonText={"Log out"} onSend={obj.handleSendLogoutForm} />
+                    <p>Log out page</p>
+                    {obj.connected() || obj.acceptNotLoginFnc() ?
+                        <Form buttonText={"Log out"} onSend={obj.handleSendLogoutForm} />
+                        : "Connection requise"}
                 </>
             } />
         </div>
