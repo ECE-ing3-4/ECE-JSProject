@@ -26,6 +26,11 @@ if (localStorage.getItem('listCards') == null) {
   localStorage.setItem('listCards', JSON.stringify([]));
 }
 
+var z = new Image();
+z.src = "https://images.pexels.com/photos/1526/dark-blur-blurred-gradient.jpg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940";
+document.body.background=z.src; 
+document.body.style.backgroundAttachment="fixed";
+
 //var listUsers = [];
 //var listWallets = [];
 //var listCards = [];
@@ -493,8 +498,9 @@ class App extends Component {
     var listCards = JSON.parse(localStorage.getItem('listCards'));
     return (
       <BrowserRouter>
-        <div>
+        <div class="d-flex p-2">
           {links(this)}
+          <br/>
           {Signup(this)}
           {login(this)}
           {logout(this)}
