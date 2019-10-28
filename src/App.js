@@ -16,11 +16,9 @@ import deposit from './Pages/Deposit.js';
 import withdrawal from './Pages/Withdrawal.js';
 import transfer from './Pages/Transfer.js';
 
-localStorage.setItem('listUsers', JSON.stringify([]));
-var listUsers = JSON.parse(localStorage.getItem('listUsers'));
-//alert(ar[0]);
-//alert(ar[1]);
-//alert(ar[2]);
+if (localStorage.getItem('listUsers') == null) {
+  localStorage.setItem('listUsers', JSON.stringify([]));
+}
 
 //var listUsers = [];
 var listWallets = [];
@@ -59,7 +57,7 @@ class App extends Component {
       var listUsers = JSON.parse(localStorage.getItem('listUsers'));
 
       var index = this.findIndexObject(listUsers, id);
-      alert("Welcome " + listUsers[index].first_name + " !");
+      alert("Welcome " + listUsers[index].first_name + " ! You're now connected :)");
     }
     else {
       alert("Invalid credentials !");
