@@ -107,7 +107,7 @@ class App extends Component {
   }
 
 
-  findCard(destinationCardDigits) {
+  findCardIndex(destinationCardDigits) {
     var listCards = JSON.parse(localStorage.getItem('listCards'));
     //find the card
     var card;
@@ -123,7 +123,7 @@ class App extends Component {
   handleBrandChangeForm(obj) {
     var listCards = JSON.parse(localStorage.getItem('listCards'));
     if (localStorage.getItem('currentUserID') > 0 || acceptNotLogin) {
-      var cardIndex = this.findCard(obj.last_4);
+      var cardIndex = this.findCardIndex(obj.last_4);
       if (cardIndex != -1) {
         if (listCards[cardIndex].user_id == localStorage.getItem('currentUserID')) {
           alert("Your " + listCards[cardIndex].brand + " card is now a " + obj.newBrand + " card");
@@ -249,8 +249,8 @@ class App extends Component {
     else {
       alert("Log in first !");
     }
-    
-    
+
+
     /*var listWallets = JSON.parse(localStorage.getItem('listWallets'));
     obj.amount = - obj.amount;
     this.handleDepositForm(obj);
@@ -261,7 +261,8 @@ class App extends Component {
   findRecipientWalletIndex(destinationCardDigits) {
     var listCards = JSON.parse(localStorage.getItem('listCards'));
     //find the card
-    var recipientCardIndex = this.findCard(destinationCardDigits);
+    var recipientCardIndex = this.findCardIndex(destinationCardDigits);
+    alert(recipientCardIndex);
     var recipientCard = listCards[recipientCardIndex];
     //find the owner of this card
     return this.findWalletUser(recipientCard.id);
@@ -292,16 +293,15 @@ class App extends Component {
   }
 
   handleSendTransferForm(obj) {
-    var listWallets = JSON.parse(localStorage.getItem('listWallets'));
     if (localStorage.getItem('currentUserID') > 0 || acceptNotLogin) {
       if (obj.amount > -1) {
 
         //alert(obj.amount + " : " + obj.destinationCardDigits);
-        var yourWallet = this.findWalletUser(localStorage.getItem('currentUserID'));
+        var yourWalletIndex = this.findWalletUserIndex(localStorage.getItem('currentUserID'));
         var recipientWalletIndex = this.findRecipientWalletIndex(obj.destinationCardDigits);
+        alert(recipientWalletIndex);
         this.depoWithdraWallet(recipientWalletIndex, parseInt(obj.amount));
-        this.depoWithdraWallet(yourWallet, -parseInt(obj.amount));
-        console.log(listWallets);
+        this.depoWithdraWallet(yourWalletIndex, -parseInt(obj.amount));
       }
       else {
         alert("hehe, NOPE !");
@@ -499,8 +499,13 @@ class App extends Component {
   getCurrentBalance() {
     var listWallets = JSON.parse(localStorage.getItem('listWallets'));
     var walletIndex = this.findWalletUserIndex(localStorage.getItem('currentUserID'));
-    var wallet = listWallets[walletIndex];
-    return wallet.balance;
+    if (walletIndex != null) {
+      var wallet = listWallets[walletIndex];
+      return wallet.balance;
+    }
+    else {
+      return 0;
+    }
   }
 
 
@@ -511,43 +516,39 @@ class App extends Component {
       <BrowserRouter>
         <div>
           {links(this)}
-<<<<<<< HEAD
           <br />
-=======
-          <br/>
-          <br/>
-          <br/>
-          <br/>
-          <br/>
-          <br/>
-          
-        </div>  
+          <br />
+          <br />
+          <br />
+          <br />
+          <br />
+
+        </div>
         <div class="container h-100">
-  <div class="row h-100 justify-content-center align-items-center">
-    <form class="col-25">
-      <div class="form-group">
->>>>>>> 8b2dec992b43c43e1c5899b394a73887e5d614a8
-          {Signup(this)}
-          {login(this)}
-          {logout(this)}
-          {modifyaccount(this)}
-          {addcard(this)}
-          {modifycard(this, listCards)}
-          {deletecard(this, listCards)}
-          {balance(this)}
-          {deposit(this)}
-          {withdrawal(this)}
-          {transfer(this)}
+          <div class="row h-100 justify-content-center align-items-center">
+            <form class="col-25">
+              <div class="form-group">
+                {Signup(this)}
+                {login(this)}
+                {logout(this)}
+                {modifyaccount(this)}
+                {addcard(this)}
+                {modifycard(this, listCards)}
+                {deletecard(this, listCards)}
+                {balance(this)}
+                {deposit(this)}
+                {withdrawal(this)}
+                {transfer(this)}
+              </div>
+            </form>
           </div>
-          </form>
-          </div>
-          </div>
-          <div>
+        </div>
+        <div>
           <span class="border-danger">
             <p class="p-7 mb-50 bg-info text-white">Your current balance is {this.getCurrentBalance()} usd</p>
-            </span>
-            </div>
-        
+          </span>
+        </div>
+
       </BrowserRouter>
     );
   }
