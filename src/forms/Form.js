@@ -4,7 +4,6 @@ class AddCardForm extends Component {
     constructor(props) {
         super(props)
         this.state = { inputs: '' };
-        //this.state = { inputs: props.inputNames };
         this.handleSendForm = this.handleSendForm.bind(this);
         this.handleChange = this.handleChange.bind(this);
         this.displayInputs = this.displayInputs.bind(this);
@@ -16,7 +15,7 @@ class AddCardForm extends Component {
 
     handleSendForm() {
         this.props.onSend(this.state);
-        this.setState(this.state.inputs.map( (inputs) => '' ) );
+        //this.state.inputs.map( (vida) => alert(vida));
     }
 
     displayInputs() {

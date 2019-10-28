@@ -16,7 +16,13 @@ import deposit from './Pages/Deposit.js';
 import withdrawal from './Pages/Withdrawal.js';
 import transfer from './Pages/Transfer.js';
 
-var listUsers = [];
+localStorage.setItem('listUsers', JSON.stringify([]));
+var listUsers = JSON.parse(localStorage.getItem('listUsers'));
+//alert(ar[0]);
+//alert(ar[1]);
+//alert(ar[2]);
+
+//var listUsers = [];
 var listWallets = [];
 var listCards = [];
 var acceptNotLogin = false;//debug
@@ -49,6 +55,9 @@ class App extends Component {
     var id = this.validUser(obj.email, obj.password);
     if (id >= 0) {//if valid
       localStorage.setItem('currentUserID', id);
+
+      var listUsers = JSON.parse(localStorage.getItem('listUsers'));
+
       var index = this.findIndexObject(listUsers, id);
       alert("Welcome " + listUsers[index].first_name + " !");
     }
@@ -70,8 +79,10 @@ class App extends Component {
 
   handleSendSignupForm(obj) {
     //Adding user
-    var indexNewUser = this.addUser(listUsers, obj.first_name, obj.last_name, obj.email, obj.password, false);
+    var indexNewUser = this.addUser(obj.first_name, obj.last_name, obj.email, obj.password, false);
     if (indexNewUser >= 0) {//user addded succefully
+      var listUsers = JSON.parse(localStorage.getItem('listUsers'));
+
       var newId = listUsers[indexNewUser].id;
       //Ading wallet
       var indexNewWallet = this.addWallet(listWallets, 0);
@@ -165,6 +176,7 @@ class App extends Component {
   }
 
   findUser(idUser) {
+    var listUsers = JSON.parse(localStorage.getItem('listUsers'));
     var usr;
     for (var i = 0; i < listUsers.length; i++) {
       usr = listUsers[i];
@@ -228,6 +240,7 @@ class App extends Component {
         if (obj.newPassword == obj.newPasswordConfirmation) {
           usr.password = obj.newPassword;
           alert("Password changed succcesfully !");
+          var listUsers = JSON.parse(localStorage.getItem('listUsers'));
           console.log(listUsers);
         }
         else {
@@ -269,6 +282,7 @@ class App extends Component {
 
   /** LISTS MANIPULATION */
   validUser(mail, pswd) {
+    var listUsers = JSON.parse(localStorage.getItem('listUsers'));
     var item;
     for (var i = 0; i < listUsers.length; i++) {
       item = listUsers[i];
@@ -343,7 +357,8 @@ class App extends Component {
     //list[index].print();
   }
 
-  addUser(list, fn, ln, e, p, ia) {
+  addUser(fn, ln, e, p, ia) {
+    var list = JSON.parse(localStorage.getItem('listUsers'));
     if (this.validUser(e, "") == -1) {//email not found
       var user = {
         id: -1,
@@ -365,6 +380,18 @@ class App extends Component {
       list[index].password = p;
       list[index].is_admin = ia;
       //list[index].print();
+
+      console.log("XXXXXXXX");
+      console.log("list a copier");
+      console.log(list);
+      console.log("contenu a copier");
+      console.log(JSON.stringify(list));
+      localStorage.setItem('listUsers', JSON.stringify(list));
+      var list2 = JSON.parse(localStorage.getItem('listUsers'));
+      console.log("contenu recuperé");
+      console.log(list2);
+      console.log("XXXXXXXX");
+
       return index;
     }
     else {
