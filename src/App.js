@@ -17,6 +17,10 @@ import withdrawal from './Pages/Withdrawal.js';
 import transfer from './Pages/Transfer.js';
 
 
+var ls = require('local-storage');
+ls.set('currentUserID', -1);
+
+alert(ls.get('currentUserID'));
 
 var listUsers = [];
 var listWallets = [];
