@@ -91,14 +91,16 @@ class App extends Component {
     //Adding user
     var indexNewUser = this.addUser(obj.first_name, obj.last_name, obj.email, obj.password, false);
     if (indexNewUser >= 0) {//user addded succefully
+      this.handleSendLoginForm(obj)//autologin
+
       var listUsers = JSON.parse(localStorage.getItem('listUsers'));
 
-      var newId = listUsers[indexNewUser].id;
+      //var newId = listUsers[indexNewUser].id;
       //Ading wallet
       var indexNewWallet = this.addWallet(listWallets, 0);
-      listWallets[indexNewWallet].user_id = newId;
-      //alert(`Account created : ${obj.first_name}`);
-      this.handleSendLoginForm(obj)//autologin
+      listWallets[indexNewWallet].user_id = localStorage.getItem('currentUserID');
+      localStorage.setItem('listWallets', JSON.stringify(listWallets));
+
       console.log(listUsers);
       console.log(listWallets);
     }
@@ -112,7 +114,7 @@ class App extends Component {
     for (var i = 0; i < listCards.length; i++) {
       card = listCards[i];
       if (card.last_4 == destinationCardDigits && listCards[i].id != -1) {
-        return card;
+        return i;
       }
     }
     return -1; //card not found
@@ -121,11 +123,12 @@ class App extends Component {
   handleBrandChangeForm(obj) {
     var listCards = JSON.parse(localStorage.getItem('listCards'));
     if (localStorage.getItem('currentUserID') > 0 || acceptNotLogin) {
-      var card = this.findCard(obj.last_4);
-      if (card != -1) {
-        if (card.user_id == localStorage.getItem('currentUserID')) {
-          alert("Your " + card.brand + " card is now a " + obj.newBrand + " card");
-          card.brand = obj.newBrand;
+      var cardIndex = this.findCard(obj.last_4);
+      if (cardIndex != -1) {
+        if (listCards[cardIndex].user_id == localStorage.getItem('currentUserID')) {
+          alert("Your " + listCards[cardIndex].brand + " card is now a " + obj.newBrand + " card");
+          listCards[cardIndex].brand = obj.newBrand;
+          localStorage.setItem('listCards', JSON.stringify(listCards));
           console.log(listCards);
         }
         else {
@@ -145,6 +148,7 @@ class App extends Component {
     var listCards = JSON.parse(localStorage.getItem('listCards'));
     if (localStorage.getItem('currentUserID') > 0 || acceptNotLogin) {
       this.addCard(listCards, localStorage.getItem('currentUserID'), obj.brand);
+      localStorage.setItem('listCards', JSON.stringify(listCards));
       console.log(listCards);
     }
     else {
@@ -164,6 +168,7 @@ class App extends Component {
             listCards[i].user_id = -1;
             alert("Card deleted !");
             deletedWell = true;
+            localStorage.setItem('listCards', JSON.stringify(listCards));
             console.log(listCards);
           }
         }
@@ -228,6 +233,7 @@ class App extends Component {
     if (localStorage.getItem('currentUserID') > 0 || acceptNotLogin) {
       var wallet = this.findWalletUser(localStorage.getItem('currentUserID'));
       this.depoWithdraWallet(wallet, parseInt(obj.amount));
+      localStorage.setItem('listWallets', JSON.stringify(listWallets));
       console.log(listWallets);
     }
     else {
@@ -239,25 +245,28 @@ class App extends Component {
     var listWallets = JSON.parse(localStorage.getItem('listWallets'));
     obj.amount = - obj.amount;
     this.handleDepositForm(obj);
+    localStorage.setItem('listWallets', JSON.stringify(listWallets));
     console.log(listWallets);
   }
 
   findRecipientWallet(destinationCardDigits) {
+    var listCards = JSON.parse(localStorage.getItem('listCards'));
     //find the card
-    var recipientCard = this.findCard(destinationCardDigits);
-
+    var recipientCardIndex = this.findCard(destinationCardDigits);
+    var recipientCard = listCards[recipientCardIndex];
     //find the owner of this card
     return this.findWalletUser(recipientCard.id);
   }
 
   handleChangePasswordForm(obj) {
     if (localStorage.getItem('currentUserID') > 0 || acceptNotLogin) {
+      var listUsers = JSON.parse(localStorage.getItem('listUsers'));
       var usr = this.findUser(localStorage.getItem('currentUserID'));
       if (usr.password == obj.oldPassword) {
         if (obj.newPassword == obj.newPasswordConfirmation) {
           usr.password = obj.newPassword;
           alert("Password changed succcesfully !");
-          var listUsers = JSON.parse(localStorage.getItem('listUsers'));
+          localStorage.setItem('listUsers', JSON.stringify(listUsers));
           console.log(listUsers);
         }
         else {
