@@ -2,10 +2,10 @@ A FAIRE OBLIGATOIRE:
 	tester tout
 
 A FAIRE EN OPTION:
-	extraire les fonctions vers des fichiers hors du app.js
 	blindage champs vides ou invalides
 	vider les champs après appui sur un bouton
 	cacher les liens quand il ne sont pas utilisable (genre cacher depot si on ne s'est pas login)
+	extraire les fonctions vers des fichiers hors du app.js
 	changer les messages lors des transferts (et encore c'est bien comme ca)
 
 

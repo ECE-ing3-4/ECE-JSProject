@@ -3,7 +3,8 @@ import React, { Component } from 'react';
 class AddCardForm extends Component {
     constructor(props) {
         super(props)
-        this.state = { inputs: props.inputNames };
+        this.state = { inputs: '' };
+        //this.state = { inputs: props.inputNames };
         this.handleSendForm = this.handleSendForm.bind(this);
         this.handleChange = this.handleChange.bind(this);
         this.displayInputs = this.displayInputs.bind(this);

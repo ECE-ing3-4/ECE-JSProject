@@ -46,7 +46,7 @@ class App extends Component {
   }
 
   /** BUTTON HANDLE */
-  handleSendLoginForm(obj) {
+  handleSendLoginForm(obj) {//
     var id = this.validUser(obj.email, obj.password);
     if (id >= 0) {//if valid
       currentUser = id;
