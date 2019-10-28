@@ -195,13 +195,13 @@ class App extends Component {
     return null;//not found
   }
 
-  findUser(idUser) {
+  findUserIndex(idUser) {
     var listUsers = JSON.parse(localStorage.getItem('listUsers'));
     var usr;
     for (var i = 0; i < listUsers.length; i++) {
       usr = listUsers[i];
       if (usr.id == idUser) {
-        return (usr);
+        return (i);
       }
     }
     return null;//not found
@@ -268,13 +268,14 @@ class App extends Component {
     return this.findWalletUserIndex(recipientCard.user_id);
   }
 
+  
   handleChangePasswordForm(obj) {
     if (localStorage.getItem('currentUserID') > 0 || acceptNotLogin) {
       var listUsers = JSON.parse(localStorage.getItem('listUsers'));
-      var usr = this.findUser(localStorage.getItem('currentUserID'));
-      if (usr.password == obj.oldPassword) {
+      var usrIndex = this.findUserIndex(localStorage.getItem('currentUserID'));
+      if (listUsers[usrIndex].password == obj.oldPassword) {
         if (obj.newPassword == obj.newPasswordConfirmation) {
-          usr.password = obj.newPassword;
+          listUsers[usrIndex].password = obj.newPassword;
           alert("Password changed succcesfully !");
           localStorage.setItem('listUsers', JSON.stringify(listUsers));
           console.log(listUsers);
