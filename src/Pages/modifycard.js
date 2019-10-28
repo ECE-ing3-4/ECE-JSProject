@@ -58,13 +58,14 @@ function printfcard(obj) {
 */
 function printfcard(listCards, usrID) {
     let str = listCards.map((card) => {
-        if (card.usrID == usrID) {
+        console.log(usrID);
+        //if (card.usrID == usrID) {
             return (
                 <p>
                     Your {card.brand} card (XXXX-XXXX-XXXX-{card.last_4}) expire at {card.expired_at}.
             </p>
             );
-        }
+        //}
     });
     return (str);
 }
