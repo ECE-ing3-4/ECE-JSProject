@@ -4,10 +4,6 @@ import Form from '../Forms/Form.js';
 
 function printfcard(listCards, usrID) {
     let str = listCards.map((card) => {
-<<<<<<< HEAD
-        alert(card.user_id + " vs "+ usrID);
-=======
->>>>>>> 2a32032ec7e4f8aed2dd38ed965d83287a8d2103
         if (card.user_id == usrID) {
             return (
                 <p>
