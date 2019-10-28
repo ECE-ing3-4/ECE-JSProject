@@ -28,8 +28,8 @@ if (localStorage.getItem('listCards') == null) {
 
 var z = new Image();
 z.src = "https://images.pexels.com/photos/1526/dark-blur-blurred-gradient.jpg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940";
-document.body.background=z.src; 
-document.body.style.backgroundAttachment="fixed";
+document.body.background = z.src;
+document.body.style.backgroundAttachment = "fixed";
 
 //var listUsers = [];
 //var listWallets = [];
@@ -500,39 +500,43 @@ class App extends Component {
       <BrowserRouter>
         <div>
           {links(this)}
-          <br/>
-          <br/>
-          <br/>
-          <br/>
-          <br/>
-          <br/>
-          
-        </div>  
-        <div class="container h-100">
-  <div class="row h-100 justify-content-center align-items-center">
-    <form class="col-25">
-      <div class="form-group">
-          {Signup(this)}
-          {login(this)}
-          {logout(this)}
-          {modifyaccount(this)}
-          {addcard(this)}
-          {modifycard(this, listCards)}
-          {deletecard(this, listCards)}
-          {balance(this)}
-          {deposit(this)}
-          {withdrawal(this)}
-          {transfer(this)}
-          </div>
-          </form>
-          </div>
-          </div>
-          <div>
-          <span class="border-danger">
+
+        </div>
+        <div class="col-2 offset-md-8">
+          <form class="col-13 justify-content-right align-items-center">
+          <span class="border-dark">
             <p class="p-7 mb-50 bg-info text-white">Your current balance is {this.getCurrentBalance()} usd</p>
-            </span>
-            </div>
-        
+          </span>
+          </form>
+        </div>
+        <br />
+          <br />
+          <br />
+          <br />
+          <br />
+          <br />
+
+        <div class="container h-100">
+          <div class="row h-100 justify-content-center align-items-center">
+            <form class="col-25">
+              <div class="form-group">
+                {Signup(this)}
+                {login(this)}
+                {logout(this)}
+                {modifyaccount(this)}
+                {addcard(this)}
+                {modifycard(this, listCards)}
+                {deletecard(this, listCards)}
+                {balance(this)}
+                {deposit(this)}
+                {withdrawal(this)}
+                {transfer(this)}
+              </div>
+            </form>
+          </div>
+        </div>
+
+
       </BrowserRouter>
     );
   }
