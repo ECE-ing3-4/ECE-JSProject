@@ -18,7 +18,7 @@ class AddCardForm extends Component {
         this.props.onSend(this.state);
         if (this.state == '')
             alert('Wrong input');
-        this.setState({ inputs: "salut" });
+        this.setState({ inputs:'' });
     }
 
     displayInputs() {
@@ -46,7 +46,7 @@ class AddCardForm extends Component {
         return (
             <div>
                 {this.displayInputs()}
-                <button onClick={this.handleSendForm}>{this.props.buttonText}</button>
+                <button onClick={this.handleSendForm} onFocus={this.handleSendForm = ''}>{this.props.buttonText}</button>
             </div>
         );
     }
