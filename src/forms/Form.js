@@ -40,7 +40,7 @@ class AddCardForm extends Component {
         return (
             <div>
                 {this.displayInputs()}
-                <button onClick={this.handleSendForm}>{this.props.buttonText}</button>
+                <button type ="reset" onClick={this.handleSendForm}>{this.props.buttonText}</button>
             </div>
         );
     }
