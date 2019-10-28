@@ -19,10 +19,16 @@ import transfer from './Pages/Transfer.js';
 if (localStorage.getItem('listUsers') == null) {
   localStorage.setItem('listUsers', JSON.stringify([]));
 }
+if (localStorage.getItem('listWallets') == null) {
+  localStorage.setItem('listWallets', JSON.stringify([]));
+}
+if (localStorage.getItem('listCards') == null) {
+  localStorage.setItem('listCards', JSON.stringify([]));
+}
 
 //var listUsers = [];
-var listWallets = [];
-var listCards = [];
+//var listWallets = [];
+//var listCards = [];
 var acceptNotLogin = false;//debug
 var acceptEmptyFields = false;//debug
 
@@ -76,6 +82,7 @@ class App extends Component {
   }
 
   handleSendSignupForm(obj) {
+    var listWallets = JSON.parse(localStorage.getItem('listWallets'));
     //Adding user
     var indexNewUser = this.addUser(obj.first_name, obj.last_name, obj.email, obj.password, false);
     if (indexNewUser >= 0) {//user addded succefully
@@ -94,6 +101,7 @@ class App extends Component {
 
 
   findCard(destinationCardDigits) {
+    var listCards = JSON.parse(localStorage.getItem('listCards'));
     //find the card
     var card;
     for (var i = 0; i < listCards.length; i++) {
@@ -106,6 +114,7 @@ class App extends Component {
   }
 
   handleBrandChangeForm(obj) {
+    var listCards = JSON.parse(localStorage.getItem('listCards'));
     if (localStorage.getItem('currentUserID') > 0 || acceptNotLogin) {
       var card = this.findCard(obj.last_4);
       if (card != -1) {
@@ -128,6 +137,7 @@ class App extends Component {
   }
 
   handleSendAddCardForm(obj) {
+    var listCards = JSON.parse(localStorage.getItem('listCards'));
     if (localStorage.getItem('currentUserID') > 0 || acceptNotLogin) {
       this.addCard(listCards, localStorage.getItem('currentUserID'), obj.brand);
       console.log(listCards);
@@ -138,6 +148,7 @@ class App extends Component {
   }
 
   handleDeleteCardForm(obj) {
+    var listCards = JSON.parse(localStorage.getItem('listCards'));
     if (localStorage.getItem('currentUserID') > 0 || acceptNotLogin) {
       let deletedWell = false;
       for (var i = 0; i < listCards.length; i++) {
@@ -163,6 +174,7 @@ class App extends Component {
   }
 
   findWalletUser(idUser) {
+    var listWallets = JSON.parse(localStorage.getItem('listWallets'));
     var wallet;
     for (var i = 0; i < listWallets.length; i++) {
       wallet = listWallets[i];
@@ -207,6 +219,7 @@ class App extends Component {
   }
 
   handleDepositForm(obj) {
+    var listWallets = JSON.parse(localStorage.getItem('listWallets'));
     if (localStorage.getItem('currentUserID') > 0 || acceptNotLogin) {
       var wallet = this.findWalletUser(localStorage.getItem('currentUserID'));
       this.depoWithdraWallet(wallet, parseInt(obj.amount));
@@ -218,6 +231,7 @@ class App extends Component {
   }
 
   handleWithdrawalForm(obj) {
+    var listWallets = JSON.parse(localStorage.getItem('listWallets'));
     obj.amount = - obj.amount;
     this.handleDepositForm(obj);
     console.log(listWallets);
@@ -255,6 +269,7 @@ class App extends Component {
   }
 
   handleSendTransferForm(obj) {
+    var listWallets = JSON.parse(localStorage.getItem('listWallets'));
     if (localStorage.getItem('currentUserID') > 0 || acceptNotLogin) {
       if (obj.amount > -1) {
 
@@ -379,17 +394,7 @@ class App extends Component {
       list[index].is_admin = ia;
       //list[index].print();
 
-      console.log("XXXXXXXX");
-      console.log("list a copier");
-      console.log(list);
-      console.log("contenu a copier");
-      console.log(JSON.stringify(list));
       localStorage.setItem('listUsers', JSON.stringify(list));
-      var list2 = JSON.parse(localStorage.getItem('listUsers'));
-      console.log("contenu recuperé");
-      console.log(list2);
-      console.log("XXXXXXXX");
-
       return index;
     }
     else {
@@ -413,6 +418,7 @@ class App extends Component {
     list[index].balance = bal;
     //list[index].user_id=currentUser;//inutile car on vient de sign up, pas de log in
     //list[index].print();
+    localStorage.setItem('listWallets', JSON.stringify(list));
     return index;
   }
 
@@ -453,6 +459,7 @@ class App extends Component {
     list[index].last_4 = this.lastFourDigits();
     list[index].expired_at = this.getDateExp();
     //list[index].print();
+    localStorage.setItem('listCards', JSON.stringify(list));
     alert("Your new " + brand + " card expire at " + list[index].expired_at + " and the last 4 digits are " + list[index].last_4);
   }
 
@@ -468,14 +475,13 @@ class App extends Component {
 
   getCurrentBalance() {
     var wallet = this.findWalletUser(localStorage.getItem('currentUserID'));
-
     return wallet.balance;
   }
 
 
   /** RENDER */
   render() {
-    
+    var listCards = JSON.parse(localStorage.getItem('listCards'));
     return (
       <BrowserRouter>
         <div>
