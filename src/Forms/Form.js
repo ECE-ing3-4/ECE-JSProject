@@ -16,7 +16,12 @@ class AddCardForm extends Component {
 
     handleSendForm() {
         this.props.onSend(this.state);
-        this.setState(this.state.inputs.map( (inputs) => '' ) );
+        //this.state.inputs = Array.from(this.state.inputs);
+        //this.setState(this.state.inputs.map( (vida) => alert(vida) ) );
+        console.log(this.state);
+        this.state = [].slice.call(this.state);
+        console.log(Array.from(this.state));
+        this.state.map((vida) => alert(vida));
     }
 
     displayInputs() {
