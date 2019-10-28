@@ -450,10 +450,10 @@ class App extends Component {
   }
 
   getNames() {
-    var a= localStorage.getItem('currentUserID');
-    var b= this.findUserIndex(a);
-    var c= JSON.localStorage.getItem('listUsers');
-    return (c[b].first_name + " " + c[b].last_name);
+    var userID= localStorage.getItem('currentUserID');
+    var userindex= this.findUserIndex(userID);
+    var listUsers= JSON.parse(localStorage.getItem('listUsers'));
+    return (listUsers[userindex].first_name + " " + listUsers[userindex].last_name);
   }
 
   getDateExp() {
