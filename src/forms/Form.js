@@ -16,9 +16,7 @@ class AddCardForm extends Component {
 
     handleSendForm() {
         this.props.onSend(this.state);
-        if (this.state == '')
-            alert('Wrong input');
-        this.setState({ inputs:'' });
+        this.setState(this.state.inputs.map( (inputs) => '' ) );
     }
 
     displayInputs() {
