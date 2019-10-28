@@ -28,8 +28,8 @@ if (localStorage.getItem('listCards') == null) {
 
 var z = new Image();
 z.src = "https://images.pexels.com/photos/1526/dark-blur-blurred-gradient.jpg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940";
-document.body.background=z.src; 
-document.body.style.backgroundAttachment="fixed";
+document.body.background = z.src;
+document.body.style.backgroundAttachment = "fixed";
 
 //var listUsers = [];
 //var listWallets = [];
@@ -183,13 +183,13 @@ class App extends Component {
 
   }
 
-  findWalletUser(idUser) {
+  findWalletUserIndex(idUser) {
     var listWallets = JSON.parse(localStorage.getItem('listWallets'));
     var wallet;
     for (var i = 0; i < listWallets.length; i++) {
       wallet = listWallets[i];
       if (wallet.user_id == idUser) {
-        return (wallet);
+        return (i);
       }
     }
     return null;//not found
@@ -207,34 +207,34 @@ class App extends Component {
     return null;//not found
   }
 
-  depoWithdraWallet(wallet, amount) {
-    if (wallet != null) {
+  depoWithdraWallet(walletIndex, amount) {
+    var listWallets = JSON.parse(localStorage.getItem('listWallets'));
+    if (listWallets[walletIndex] != null) {
       if (amount > 0) {
-        wallet.balance += amount;
+        listWallets[walletIndex].balance += amount;
         alert(`Succesfully deposited ${amount} !`);
       }
       else {
-        if (-amount <= wallet.balance) {
-          wallet.balance += amount;
+        if (-amount <= listWallets[walletIndex].balance) {
+          listWallets[walletIndex].balance += amount;
           alert(`Succesfully withdrawed ${-amount} !`);
         }
         else {
           alert(`Invalid amount : not enough money !`);
         }
       }
+      localStorage.setItem('listWallets', JSON.stringify(listWallets));
     }
     else {
       alert("Log in first !");
     }
+
   }
 
   handleDepositForm(obj) {
-    var listWallets = JSON.parse(localStorage.getItem('listWallets'));
     if (localStorage.getItem('currentUserID') > 0 || acceptNotLogin) {
-      var wallet = this.findWalletUser(localStorage.getItem('currentUserID'));
-      this.depoWithdraWallet(wallet, parseInt(obj.amount));
-      localStorage.setItem('listWallets', JSON.stringify(listWallets));
-      console.log(listWallets);
+      var walletIndex = this.findWalletUserIndex(localStorage.getItem('currentUserID'));
+      this.depoWithdraWallet(walletIndex, parseInt(obj.amount));
     }
     else {
       alert("Log in first !");
@@ -242,14 +242,23 @@ class App extends Component {
   }
 
   handleWithdrawalForm(obj) {
-    var listWallets = JSON.parse(localStorage.getItem('listWallets'));
+    if (localStorage.getItem('currentUserID') > 0 || acceptNotLogin) {
+      var walletIndex = this.findWalletUserIndex(localStorage.getItem('currentUserID'));
+      this.depoWithdraWallet(walletIndex, parseInt(-obj.amount));
+    }
+    else {
+      alert("Log in first !");
+    }
+    
+    
+    /*var listWallets = JSON.parse(localStorage.getItem('listWallets'));
     obj.amount = - obj.amount;
     this.handleDepositForm(obj);
     localStorage.setItem('listWallets', JSON.stringify(listWallets));
-    console.log(listWallets);
+    console.log(listWallets);*/
   }
 
-  findRecipientWallet(destinationCardDigits) {
+  findRecipientWalletIndex(destinationCardDigits) {
     var listCards = JSON.parse(localStorage.getItem('listCards'));
     //find the card
     var recipientCardIndex = this.findCard(destinationCardDigits);
@@ -289,8 +298,8 @@ class App extends Component {
 
         //alert(obj.amount + " : " + obj.destinationCardDigits);
         var yourWallet = this.findWalletUser(localStorage.getItem('currentUserID'));
-        var recipientWallet = this.findRecipientWallet(obj.destinationCardDigits);
-        this.depoWithdraWallet(recipientWallet, parseInt(obj.amount));
+        var recipientWalletIndex = this.findRecipientWalletIndex(obj.destinationCardDigits);
+        this.depoWithdraWallet(recipientWalletIndex, parseInt(obj.amount));
         this.depoWithdraWallet(yourWallet, -parseInt(obj.amount));
         console.log(listWallets);
       }
@@ -488,7 +497,9 @@ class App extends Component {
   }
 
   getCurrentBalance() {
-    var wallet = this.findWalletUser(localStorage.getItem('currentUserID'));
+    var listWallets = JSON.parse(localStorage.getItem('listWallets'));
+    var walletIndex = this.findWalletUserIndex(localStorage.getItem('currentUserID'));
+    var wallet = listWallets[walletIndex];
     return wallet.balance;
   }
 
@@ -500,7 +511,7 @@ class App extends Component {
       <BrowserRouter>
         <div class="d-flex p-2">
           {links(this)}
-          <br/>
+          <br />
           {Signup(this)}
           {login(this)}
           {logout(this)}
