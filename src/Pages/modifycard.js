@@ -70,7 +70,7 @@ function printfcard(listCards, usrID) {
     return (str);
 }
 
-export default function modifycard(obj, listCards, usrID) {
+export default function modifycard(obj, listCards) {
     return (
         <div>
             <Route exact path="/modifycard" component={() =>
