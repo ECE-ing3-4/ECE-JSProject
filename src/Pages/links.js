@@ -48,7 +48,6 @@ export default function links(obj) {
             </UncontrolledDropdown>
 
 
-            <li class="nav-item"><a class="nav-link" href="/balance">Balance</a></li>
             <li class="nav-item"><a class="nav-link" href="/deposit">Deposit</a></li>
             <li class="nav-item"><a class="nav-link" href="/withdrawal">Withdrawal</a></li>
             <li class="nav-item"><a class="nav-link" href="/transfer">Transfers</a></li>

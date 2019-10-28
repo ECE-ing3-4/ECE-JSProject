@@ -526,12 +526,11 @@ class App extends Component {
         </div>
 
 
-        <div class="col-2 offset-md-2">
+        <div class="col-2 offset-md-8">
           <form class="col-13 justify-content-right align-items-center">
             <span class="border-dark">
               <p class="p-7 mb-50 bg-info text-white">Your are connected as {this.getNames()} </p>
             </span>
-            <br />
           </form>
         </div>
 
