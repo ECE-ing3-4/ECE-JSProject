@@ -262,10 +262,10 @@ class App extends Component {
     var listCards = JSON.parse(localStorage.getItem('listCards'));
     //find the card
     var recipientCardIndex = this.findCardIndex(destinationCardDigits);
-    alert(recipientCardIndex);
+    
     var recipientCard = listCards[recipientCardIndex];
     //find the owner of this card
-    return this.findWalletUser(recipientCard.id);
+    return this.findWalletUserIndex(recipientCard.user_id);
   }
 
   handleChangePasswordForm(obj) {
@@ -299,7 +299,6 @@ class App extends Component {
         //alert(obj.amount + " : " + obj.destinationCardDigits);
         var yourWalletIndex = this.findWalletUserIndex(localStorage.getItem('currentUserID'));
         var recipientWalletIndex = this.findRecipientWalletIndex(obj.destinationCardDigits);
-        alert(recipientWalletIndex);
         this.depoWithdraWallet(recipientWalletIndex, parseInt(obj.amount));
         this.depoWithdraWallet(yourWalletIndex, -parseInt(obj.amount));
       }
