@@ -262,13 +262,13 @@ class App extends Component {
     var listCards = JSON.parse(localStorage.getItem('listCards'));
     //find the card
     var recipientCardIndex = this.findCardIndex(destinationCardDigits);
-    
+
     var recipientCard = listCards[recipientCardIndex];
     //find the owner of this card
     return this.findWalletUserIndex(recipientCard.user_id);
   }
 
-  
+
   handleChangePasswordForm(obj) {
     if (localStorage.getItem('currentUserID') > 0 || acceptNotLogin) {
       var listUsers = JSON.parse(localStorage.getItem('listUsers'));
@@ -450,10 +450,21 @@ class App extends Component {
   }
 
   getNames() {
-    var userID= localStorage.getItem('currentUserID');
-    var userindex= this.findUserIndex(userID);
-    var listUsers= JSON.parse(localStorage.getItem('listUsers'));
-    return (listUsers[userindex].first_name + " " + listUsers[userindex].last_name);
+    var userID = localStorage.getItem('currentUserID');
+    if (userID < 0) {
+      return ("You're not connected");
+    }
+    else {
+      var userindex = this.findUserIndex(userID);
+      var listUsers = JSON.parse(localStorage.getItem('listUsers'));
+      //var fn, ln;
+
+      if (userindex != null) {
+        var fn = listUsers[userindex].first_name;
+        var ln = listUsers[userindex].last_name;
+      }
+      return ("Your are connected as " + fn + " " + ln);
+    }
   }
 
   getDateExp() {
@@ -529,7 +540,7 @@ class App extends Component {
         <div class="col-2 offset-md-8">
           <form class="col-13 justify-content-right align-items-center">
             <span class="border-dark">
-              <p class="p-7 mb-50 bg-info text-white">Your are connected as {this.getNames()} </p>
+              <p class="p-7 mb-50 bg-info text-white">{this.getNames()} </p>
             </span>
           </form>
         </div>
@@ -542,7 +553,6 @@ class App extends Component {
             <br />
           </form>
         </div>
-
 
         <br />
         <br />
