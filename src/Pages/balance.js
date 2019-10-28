@@ -8,7 +8,7 @@ export default function balance(obj) {
         <>
           <p>Balance page</p>
           {obj.connected() || obj.acceptNotLoginFnc() ?
-            <p>Your currrent balance is {obj.getCurrentBalance()} usd</p>
+            <p>Your current balance is {obj.getCurrentBalance()} usd</p>
             : "Connection requise"}
         </>
       } />

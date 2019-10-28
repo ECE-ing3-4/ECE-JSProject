@@ -509,9 +509,24 @@ class App extends Component {
     var listCards = JSON.parse(localStorage.getItem('listCards'));
     return (
       <BrowserRouter>
-        <div class="d-flex p-2">
+        <div>
           {links(this)}
+<<<<<<< HEAD
           <br />
+=======
+          <br/>
+          <br/>
+          <br/>
+          <br/>
+          <br/>
+          <br/>
+          
+        </div>  
+        <div class="container h-100">
+  <div class="row h-100 justify-content-center align-items-center">
+    <form class="col-25">
+      <div class="form-group">
+>>>>>>> 8b2dec992b43c43e1c5899b394a73887e5d614a8
           {Signup(this)}
           {login(this)}
           {logout(this)}
@@ -523,7 +538,16 @@ class App extends Component {
           {deposit(this)}
           {withdrawal(this)}
           {transfer(this)}
-        </div>
+          </div>
+          </form>
+          </div>
+          </div>
+          <div>
+          <span class="border-danger">
+            <p class="p-7 mb-50 bg-info text-white">Your current balance is {this.getCurrentBalance()} usd</p>
+            </span>
+            </div>
+        
       </BrowserRouter>
     );
   }
