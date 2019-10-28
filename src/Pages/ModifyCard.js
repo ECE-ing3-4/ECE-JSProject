@@ -23,7 +23,6 @@ export default function modifycard(obj, listCards) {
         <div>
             <Route exact path="/modifycard" component={() =>
                 <>
-                    <p>Modify card</p>
                     {obj.connected() || obj.acceptNotLoginFnc() ?
                         <>
                             {printfcard(listCards, obj.getCurrentID())}

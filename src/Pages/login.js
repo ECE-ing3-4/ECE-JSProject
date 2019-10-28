@@ -7,7 +7,6 @@ export default function login(obj) {
         <div>
             <Route exact path="/login" component={() =>
                 <>
-                    Log in page
                     <Form inputNames={["email", "password"]} inputTexts={["Email", "Password"]} buttonText={"Log in"} onSend={obj.handleSendLoginForm} />
                 </>
             } />

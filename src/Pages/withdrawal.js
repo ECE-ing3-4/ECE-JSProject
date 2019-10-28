@@ -7,7 +7,6 @@ export default function withdrawal(obj) {
     <div>
       <Route exact path="/withdrawal" component={() =>
         <>
-          <p>Withdrawal in page</p>
           {obj.connected() || obj.acceptNotLoginFnc() ?
             <Form inputNames={["amount"]} inputTexts={["Amount"]} buttonText={"Make a withdrawal"} onSend={obj.handleWithdrawalForm} />
             : "Connection requise"}

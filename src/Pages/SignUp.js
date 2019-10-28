@@ -7,7 +7,6 @@ export default function signup(obj) {
         <div>
             <Route exact path="/signup" component={() =>
                 <>
-                    Sign up page
                     <Form inputNames={["first_name", "last_name", "email", "password"]} inputTexts={["First name", "Last Name", "Email", "Password"]} buttonText={"Sign up"} onSend={obj.handleSendSignupForm} />
                 </>
             } />
