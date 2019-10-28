@@ -46,7 +46,7 @@ class AddCardForm extends Component {
         return (
             <div>
                 {this.displayInputs()}
-                <button onClick={this.handleSendForm} onFocus={this.handleSendForm = ''}>{this.props.buttonText}</button>
+                <button onClick={this.handleSendForm}>{this.props.buttonText}</button>
             </div>
         );
     }

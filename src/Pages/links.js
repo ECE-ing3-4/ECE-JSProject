@@ -24,7 +24,6 @@ export default function links(obj) {
 
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav mr-auto">
-            <li><Link to="/deposit">Deposit</Link></li>
             <li class="nav-item"><a class="nav-link" href="/signup">Sign up</a></li>
             <li class="nav-item"><a class="nav-link" href="/login">Log in</a></li>
             <li class="nav-item"><a class="nav-link" href="/logout">Log out</a></li>

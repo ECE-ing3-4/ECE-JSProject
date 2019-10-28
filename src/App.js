@@ -16,17 +16,9 @@ import deposit from './Pages/Deposit.js';
 import withdrawal from './Pages/Withdrawal.js';
 import transfer from './Pages/Transfer.js';
 
-
-//var ls = require('local-storage');
-import ls from 'local-storage';
-ls.set('currentUserID', -1);
-
-//alert(ls.get('currentUserID'));
-
 var listUsers = [];
 var listWallets = [];
 var listCards = [];
-var currentUser = -1;
 var acceptNotLogin = false;//debug
 var acceptEmptyFields = false;//debug
 
@@ -49,16 +41,14 @@ class App extends Component {
   }
 
   getCurrentID() {
-    return currentUser;
+    return localStorage.getItem('currentUserID');
   }
 
   /** BUTTON HANDLE */
-  handleSendLoginForm(obj) {//
-    alert(ls.get('currentUserID'));
+  handleSendLoginForm(obj) {
     var id = this.validUser(obj.email, obj.password);
     if (id >= 0) {//if valid
-      currentUser = id;
-      ls.set('currentUserID', id);
+      localStorage.setItem('currentUserID', id);
       var index = this.findIndexObject(listUsers, id);
       alert("Welcome " + listUsers[index].first_name + " !");
     }
@@ -68,9 +58,8 @@ class App extends Component {
   }
 
   handleSendLogoutForm() {
-    if (currentUser > 0) {
-      currentUser = -1;
-      ls.set('currentUserID', -1);
+    if (localStorage.getItem('currentUserID') > 0) {
+      localStorage.setItem('currentUserID', -1);
       alert("Bye Bye");
     }
   }
@@ -108,10 +97,10 @@ class App extends Component {
   }
 
   handleBrandChangeForm(obj) {
-    if (currentUser > 0 || acceptNotLogin) {
+    if (localStorage.getItem('currentUserID') > 0 || acceptNotLogin) {
       var card = this.findCard(obj.last_4);
       if (card != -1) {
-        if (card.user_id == currentUser) {
+        if (card.user_id == localStorage.getItem('currentUserID')) {
           alert("Your " + card.brand + " card is now a " + obj.newBrand + " card");
           card.brand = obj.newBrand;
           console.log(listCards);
@@ -130,8 +119,8 @@ class App extends Component {
   }
 
   handleSendAddCardForm(obj) {
-    if (currentUser > 0 || acceptNotLogin) {
-      this.addCard(listCards, currentUser, obj.brand);
+    if (localStorage.getItem('currentUserID') > 0 || acceptNotLogin) {
+      this.addCard(listCards, localStorage.getItem('currentUserID'), obj.brand);
       console.log(listCards);
     }
     else {
@@ -140,11 +129,10 @@ class App extends Component {
   }
 
   handleDeleteCardForm(obj) {
-    if (currentUser > 0 || acceptNotLogin) {
+    if (localStorage.getItem('currentUserID') > 0 || acceptNotLogin) {
       let deletedWell = false;
       for (var i = 0; i < listCards.length; i++) {
-        if (ls.get('currentUserID') == listCards[i].user_id && listCards[i].last_4 == obj.last_4) {
-          //if (currentUser == listCards[i].user_id && listCards[i].last_4 == obj.last_4) {
+        if (localStorage.getItem('currentUserID') == listCards[i].user_id && listCards[i].last_4 == obj.last_4) {
           if (listCards[i].id != -1) {
             //listCards.slice(i, 1);
             listCards[i].id = -1;
@@ -209,8 +197,8 @@ class App extends Component {
   }
 
   handleDepositForm(obj) {
-    if (currentUser > 0 || acceptNotLogin) {
-      var wallet = this.findWalletUser(currentUser);
+    if (localStorage.getItem('currentUserID') > 0 || acceptNotLogin) {
+      var wallet = this.findWalletUser(localStorage.getItem('currentUserID'));
       this.depoWithdraWallet(wallet, parseInt(obj.amount));
       console.log(listWallets);
     }
@@ -234,8 +222,8 @@ class App extends Component {
   }
 
   handleChangePasswordForm(obj) {
-    if (currentUser > 0 || acceptNotLogin) {
-      var usr = this.findUser(currentUser);
+    if (localStorage.getItem('currentUserID') > 0 || acceptNotLogin) {
+      var usr = this.findUser(localStorage.getItem('currentUserID'));
       if (usr.password == obj.oldPassword) {
         if (obj.newPassword == obj.newPasswordConfirmation) {
           usr.password = obj.newPassword;
@@ -256,11 +244,11 @@ class App extends Component {
   }
 
   handleSendTransferForm(obj) {
-    if (currentUser > 0 || acceptNotLogin) {
+    if (localStorage.getItem('currentUserID') > 0 || acceptNotLogin) {
       if (obj.amount > -1) {
 
         //alert(obj.amount + " : " + obj.destinationCardDigits);
-        var yourWallet = this.findWalletUser(currentUser);
+        var yourWallet = this.findWalletUser(localStorage.getItem('currentUserID'));
         var recipientWallet = this.findRecipientWallet(obj.destinationCardDigits);
         this.depoWithdraWallet(recipientWallet, parseInt(obj.amount));
         this.depoWithdraWallet(yourWallet, -parseInt(obj.amount));
@@ -444,8 +432,8 @@ class App extends Component {
   }
 
   connected() {
-    alert(ls.get('currentUserID'));
-    return (ls.get('currentUserID') > 0);
+    //alert(localStorage.getItem('currentUserID'));
+    return (localStorage.getItem('currentUserID') > 0);
     //return (currentUser > 0);
   }
 
@@ -454,7 +442,7 @@ class App extends Component {
   }
 
   getCurrentBalance() {
-    var wallet = this.findWalletUser(currentUser);
+    var wallet = this.findWalletUser(localStorage.getItem('currentUserID'));
 
     return wallet.balance;
   }
